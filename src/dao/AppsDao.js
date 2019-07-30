@@ -18,7 +18,7 @@ function validAppObject(data){
 export async function fetchApps(apiEndPoint, keyOfLocalStorage){
   try {
     const listFromStorage = JSON.parse(localStorage.getItem(keyOfLocalStorage));
-    if(!_.isEmpty(listFromStorage) && validAppObject(listFromStorage)){
+    if(!_.isEmpty(listFromStorage)){
       return listFromStorage
     } else {
       const result = await axios.get(apiEndPoint);
