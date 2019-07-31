@@ -9,7 +9,11 @@ export async function fetchApps(apiEndPoint, keyOfLocalStorage){
       return listFromStorage
     } else {
       const result = await axios.get(apiEndPoint);
-      const ids = _.chain(result).get('data.feed.entry', []).map(item => _.get(item, 'id.attributes.im:id', ''));
+      const ids = _.chain(result)
+        .get('data.feed.entry', [])
+        .map(item => _.get(item, 'id.attributes.im:id', ''))
+        .value();
+      
       const appsLookupResponse = await axios.get(config.LOOKUP_API, {
         params: {
           id: ids.join(',')
