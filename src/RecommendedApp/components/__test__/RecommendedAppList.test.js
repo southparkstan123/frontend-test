@@ -1,5 +1,8 @@
-import RecommendedAppList from '../RecommendedAppList';
 import _ from 'lodash';
+import React from 'react';
+import { mount } from "enzyme";
+
+import RecommendedAppList from '../RecommendedAppList';
 import { StoreContext } from 'redux-react-hook';
 import data from '../../../../mock/RecommendedAppList.json';
 

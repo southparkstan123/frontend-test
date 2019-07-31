@@ -7,16 +7,4 @@ import { createSerializer } from "enzyme-to-json";
 
 expect.addSnapshotSerializer(createSerializer({ mode: "deep" }));
 
-const localStorageMock = {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    removeItem: jest.fn(),
-    clear: jest.fn(),
-};
-
-global.React = React;
-global.shallow = shallow;
-global.mount = mount;
-global.localStorage = localStorageMock;
-
 configure({ adapter: new Adapter() });

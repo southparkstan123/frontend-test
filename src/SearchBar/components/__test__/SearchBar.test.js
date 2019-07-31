@@ -1,8 +1,11 @@
-import SearchBar from '../SearchBar';
-import data from '../../../../mock/FreeAppList.json';
 import _ from 'lodash';
+import React from 'react';
+import { mount } from "enzyme";
 import { StoreContext } from 'redux-react-hook';
 import configureMockStore from 'redux-mock-store';
+
+import SearchBar from '../SearchBar';
+import data from '../../../../mock/FreeAppList.json';
 
 describe('<SearchBar />', () => {
 

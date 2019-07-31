@@ -1,7 +1,10 @@
+import _ from 'lodash';
+import React from 'react';
+import { mount } from "enzyme";
+import { StoreContext } from 'redux-react-hook';
+
 import AppContainer from "../components/index";
 import FreeAppList from '../../../mock/FreeAppList.json';
-import _ from 'lodash';
-import { StoreContext } from 'redux-react-hook';
 
 import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore();

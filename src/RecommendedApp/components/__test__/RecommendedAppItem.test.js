@@ -1,13 +1,16 @@
 import RecommendedAppItem from '../RecommendedAppItem';
+import React from 'react';
 import _ from 'lodash';
+
 import data from '../../../../mock/RecommendedAppList.json';
+import { shallow } from "enzyme";
 
 function dataToProps(item, index){
     return {
         index: index + 1,
         name: item.name,
         category: item.category,
-        images: item.images,
+        avatar: item.avatar,
         averageUserRating: item.averageUserRating,
         userRatingCount: item.userRatingCount
     }
