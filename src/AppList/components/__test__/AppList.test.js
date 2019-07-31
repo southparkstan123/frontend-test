@@ -34,9 +34,7 @@ describe('<AppList />', () => {
     });
 
     it('first ten items should be rendered', () => {
-
         expect(wrapper.find('div.app-item')).toHaveLength(10);
-        expect(wrapper).toMatchSnapshot();
     });
 
     it('"找不到應用程式" should be shown if both "filteredAppList" and "appList" are empty', () => {
