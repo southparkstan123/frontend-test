@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import { shallow } from "enzyme";
 
@@ -10,7 +9,7 @@ function dataToProps(item, index){
         index: index + 1,
         name: item.name,
         category: item.category,
-        images: item.images,
+        avatar: item.avatar,
         averageUserRating: item.averageUserRating,
         userRatingCount: item.userRatingCount
     }
