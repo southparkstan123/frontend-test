@@ -1,4 +1,3 @@
-// @ flow
 import * as axios from 'axios';
 import _ from 'lodash';
 import config from '../config';

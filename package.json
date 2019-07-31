@@ -27,7 +27,7 @@
     "eject": "react-scripts eject",
     "flow": "flow",
     "test": "react-scripts test --env=jsdom -u",
-    "lint:fix": "eslint src/**/*.js --fix"
+    "lint:fix": "eslint src/*.js --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
