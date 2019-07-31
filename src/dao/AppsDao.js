@@ -2,19 +2,6 @@ import * as axios from 'axios';
 import _ from 'lodash';
 import config from '../config';
 
-function validAppObject(data){
-  return _.every(data, 
-    _.has(data, 'appId') && 
-    _.has(data, 'name') && 
-    _.has(data, 'category') && 
-    _.has(data, 'images') && 
-    _.has(data, 'summary') && 
-    _.has(data, 'artistName') &&
-    _.has(data, 'averageUserRating') &&
-    _.has(data, 'userRatingCount')
-  )
-}
-
 export async function fetchApps(apiEndPoint, keyOfLocalStorage){
   try {
     const listFromStorage = JSON.parse(localStorage.getItem(keyOfLocalStorage));
