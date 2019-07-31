@@ -25,9 +25,7 @@ export default function AppList() {
   }
 
   const loadNext10Apps = () => {
-    setTimeout(()=> {
-      dispatch({ type: APP_LIST_SHOW_NEXT_TEN_ITEMS })
-    }, 1000)
+    dispatch({ type: APP_LIST_SHOW_NEXT_TEN_ITEMS })
   }
 
   return (
