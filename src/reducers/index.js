@@ -5,9 +5,9 @@ import RecommendedAppReducer from './RecommendedAppReducer'
 import SiteConfigReducer from './SiteConfigReducer'
 
 const rootReducer = combineReducers({
-    AppListReducer,
-    RecommendedAppReducer,
-    SiteConfigReducer
+  AppListReducer,
+  RecommendedAppReducer,
+  SiteConfigReducer
 });
 
 export default rootReducer;
