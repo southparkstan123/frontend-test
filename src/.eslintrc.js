@@ -1,7 +1,7 @@
 module.exports = {
     "extends": "react-app",
     "rules" : {
-        "indent": ["error", 2]
+        "indent": ["error", 4]
     },
     "parser": "babel-eslint",
     "parserOptions": {

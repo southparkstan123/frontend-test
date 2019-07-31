@@ -1,23 +1,23 @@
 import { 
-  SITE_CONFIG_LOADING,
-  SITE_CONFIG_LOADED
+    SITE_CONFIG_LOADING,
+    SITE_CONFIG_LOADED
 } from '../actionTypes';
 
 const initialState = {
-  isLoading: true
+    isLoading: true
 }
 
 export default function SiteConfigReducer (state = initialState, action) {
-  switch(action.type){
-  case SITE_CONFIG_LOADING:
-    return {
-      isLoading: true
+    switch(action.type){
+    case SITE_CONFIG_LOADING:
+        return {
+            isLoading: true
+        }
+    case SITE_CONFIG_LOADED:
+        return {
+            isLoading: false
+        }
+    default:
+        return state;
     }
-  case SITE_CONFIG_LOADED:
-    return {
-      isLoading: false
-    }
-  default:
-    return state;
-  }
 };

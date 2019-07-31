@@ -42,28 +42,28 @@ describe('<SearchBar />', () => {
 
     it('the function "handleChangeInput" should be triggered when the keyword is on changed', () => {
         const onChangeKeyword = jest.fn();
-        
+
         wrapper = mount(
             <StoreContext.Provider value={store}>
-                <SearchBar onChangeKeyword={onChangeKeyword}/>
+                <SearchBar onChangeKeyword={onChangeKeyword} />
             </StoreContext.Provider>
         );
-        
-        wrapper.find('input#search-input').simulate('change', {target: {value: "T"}});
-        
+
+        wrapper.find('input#search-input').simulate('change', { target: { value: "T" } });
+
         expect(onChangeKeyword).toHaveBeenCalledWith("T");
     });
 
     it('the function "handleChangeInput" should be triggered when the keyword is on changed', () => {
         const onChangeKeyword = jest.fn();
-        
+
         wrapper = mount(
             <StoreContext.Provider value={store}>
-                <SearchBar onChangeKeyword={onChangeKeyword}/>
+                <SearchBar onChangeKeyword={onChangeKeyword} />
             </StoreContext.Provider>
         );
-        
-        wrapper.find('input#search-input').simulate('change', {target: {value: " Test "}});
+
+        wrapper.find('input#search-input').simulate('change', { target: { value: " Test " } });
 
         expect(onChangeKeyword).toHaveBeenCalledWith("Test");
     });
