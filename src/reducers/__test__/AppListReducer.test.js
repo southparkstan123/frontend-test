@@ -75,13 +75,6 @@ describe('AppListReducer', () => {
         
         expect(result.filteredAppList).toHaveLength(100);
         expect(result.appList).toHaveLength(0);
-        expect(result.hasMoreItems).toBe(true);
-
-
-        result = AppListReducer(result, {type: APP_LIST_SHOW_NEXT_TEN_ITEMS });
-        
-        expect(result.filteredAppList).toHaveLength(100);
-        expect(result.appList).toHaveLength(0);
         expect(result.hasMoreItems).toBe(false);
 
         // Dispatch again
@@ -91,5 +84,23 @@ describe('AppListReducer', () => {
         expect(result.appList).toHaveLength(0);
         expect(result.hasMoreItems).toBe(false);
     });
+
+    it('should search by keyword', () => {
+        let keyword = "T"
+        let result = AppListReducer(initialState, {type: SEARCH_RESULT_BY_KEYWORD, keyword, data });
+
+        expect(result.filteredAppList).toHaveLength(10);
+        expect(result.appList).toHaveLength(9);
+        expect(result.hasMoreItems).toBe(true);
+
+        keyword = "Te"
+        result = AppListReducer(initialState, {type: SEARCH_RESULT_BY_KEYWORD, keyword, data });
+
+        expect(result.filteredAppList).toHaveLength(10);
+        expect(result.appList).toHaveLength(7);
+
+        expect(_.flatten(result.appList)).toHaveLength(62);
+        expect(result.hasMoreItems).toBe(true);
+    })
 
 });

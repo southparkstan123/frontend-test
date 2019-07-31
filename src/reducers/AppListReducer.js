@@ -1,4 +1,9 @@
 import _ from "lodash";
+import { 
+    APP_LIST_GET_FIRST_TEN_APPS,
+    SEARCH_RESULT_BY_KEYWORD,
+    APP_LIST_SHOW_NEXT_TEN_ITEMS
+} from '../actionTypes';
 
 const initialState = {
     appList: [],
@@ -8,7 +13,7 @@ const initialState = {
 
 export default function AppListReducer(state = initialState, action){
     switch(action.type){
-        case "APP_LIST_GET_FIRST_TEN_APPS":
+        case APP_LIST_GET_FIRST_TEN_APPS:
             let list = _.chain(action).get('data', []).chunk(10).value();
             const filteredAppList = _.first(list);
             list.shift();
@@ -19,7 +24,7 @@ export default function AppListReducer(state = initialState, action){
                 filteredAppList,
                 hasMoreItems: true
             }
-        case "SEARCH_RESULT_BY_KEYWORD":
+        case SEARCH_RESULT_BY_KEYWORD:
             const keyword = action.keyword;
             state.hasMoreItems = (state.appList.length === 0);
 
@@ -47,15 +52,14 @@ export default function AppListReducer(state = initialState, action){
                 appList: _list,
                 filteredAppList: _.first(_list)
             }
-        case "APP_LIST_SHOW_NEXT_TEN_ITEMS":
-
-                state.hasMoreItems = !_.isEmpty(state.appList);
-
+        case APP_LIST_SHOW_NEXT_TEN_ITEMS:
                 if(state.hasMoreItems){
                     const next10Apps = _.first(state.appList);
                     state.filteredAppList = state.filteredAppList.concat(next10Apps);
                     state.appList.shift();
                 }
+
+                state.hasMoreItems = !_.isEmpty(state.appList);
             return {
                 ...state
             }
