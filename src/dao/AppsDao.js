@@ -9,41 +9,33 @@ export async function fetchApps(apiEndPoint, keyOfLocalStorage){
       return listFromStorage
     } else {
       const result = await axios.get(apiEndPoint);
+      const ids = _.chain(result).get('data.feed.entry', []).map(item => _.get(item, 'id.attributes.im:id', ''));
+      const appsLookupResponse = await axios.get(config.LOOKUP_API, {
+        params: {
+          id: ids.join(',')
+        }
+      });
 
-      const appsData = result.data.feed.entry;
-
-      const appsResult = await Promise.all(
-        appsData.map(async (app) => {
-          const appId = _.get(app, 'id.attributes.im:id', '');
-          const appInfo = await getRateAndRatingCountByUserId(appId);
+      const output = _.chain(appsLookupResponse)
+        .get('data.results', [])
+        .map((item) => {
           return {
-            appId,
-            name: _.get(app, 'im:name.label', ''),
-            category: _.get(app, 'category.attributes.label', ''),
-            images: _.get(app, 'im:image', []),
-            summary: _.get(app, 'summary.label', []),
-            artistName: _.get(appInfo, 'artistName', ''),
-            averageUserRating: _.get(appInfo, 'averageUserRating', 0),
-            userRatingCount: _.get(appInfo, 'userRatingCount', 0)
+            appId: _.get(item, 'trackId', ''),
+            name: item.trackName,
+            category: _.chain(item).get('genres', []).first().value(),
+            avatar: _.get(item, 'artworkUrl100', ''),
+            summary: _.get(item, 'description', ''),
+            artistName: _.get(item, 'artistName', ''),
+            averageUserRating: _.get(item, 'averageUserRating', 0),
+            userRatingCount: _.get(item, 'userRatingCount', 0)
           }
         })
-      );
-      localStorage.setItem(keyOfLocalStorage, JSON.stringify(appsResult));
-      return appsResult;
-    }
-  } catch (error) {
-    return error;
-  }
-}
+        .value();
 
-export async function getRateAndRatingCountByUserId(appId){
-  try {
-    const result = await axios.get(config.LOOKUP_API, {
-      params: {
-        id: appId
-      }
-    });
-    return _.chain(result).get('data.results',[]).first().value();
+      localStorage.setItem(keyOfLocalStorage, JSON.stringify(output));
+
+      return output;
+    }
   } catch (error) {
     return error;
   }

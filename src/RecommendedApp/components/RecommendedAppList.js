@@ -25,7 +25,7 @@ export default function RecommendedAppList(props) {
         (list && list.length > 0) ? list.map((item, index) => 
           <RecommendedAppItem
             key={index}
-            images={item.images}
+            avatar={item.avatar}
             name={item.name}
             category={item.category}
           ></RecommendedAppItem> 

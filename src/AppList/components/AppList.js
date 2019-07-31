@@ -44,7 +44,7 @@ export default function AppList() {
           index={index + 1} 
           name={appItem.name}
           category={appItem.category}
-          images={appItem.images}
+          avatar={appItem.avatar}
           averageUserRating={appItem.averageUserRating}
           userRatingCount={appItem.userRatingCount}
         ></AppItem>

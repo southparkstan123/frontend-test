@@ -10,6 +10,10 @@
         left: 0;
     }
 
+    .rounded {
+        border-radius: 1.25rem !important;
+    }
+
     .fade-appear {
         opacity: 0.01;
     }
@@ -66,10 +70,6 @@
 #recommended-app-container{
 
     overflow-y: scroll;
-
-    .rounded {
-        border-radius: 1.25rem !important;
-    }
 
     .recommended-app-item{
 
