@@ -26,7 +26,8 @@
     "build-CSS": "node-sass src/scss/main.scss src/css/main.css",
     "eject": "react-scripts eject",
     "flow": "flow",
-    "test": "react-scripts test --env=jsdom -u"
+    "test": "react-scripts test --env=jsdom -u",
+    "lint:fix": "eslint src/**/*.js --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,9 +45,11 @@
     ]
   },
   "devDependencies": {
+    "babel-eslint": "^10.0.2",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
+    "eslint-config-react-app": "^4.0.1",
     "flow-bin": "^0.103.0",
     "jest": "^24.8.0",
     "jest-enzyme": "^7.0.2",
