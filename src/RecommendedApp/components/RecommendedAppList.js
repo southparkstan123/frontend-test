@@ -11,8 +11,8 @@ export default function RecommendedAppList(props) {
 
   const emptyAppList = () => {
     return (
-      <div className='my-5 d-flex justify-content-center'>
-        <h1>找不到應用程式</h1>
+      <div className='w-100 text-center my-3'>
+        <h5>找不到應用程式</h5>
       </div>
     )
   }
@@ -20,18 +20,22 @@ export default function RecommendedAppList(props) {
   return (
     <div className="row border-bottom">
       <div className="mx-2">{props.title}</div>
-      <div id="recommended-app-container" className="d-flex flex-row p-2">
       {
-        (list && list.length > 0) ? list.map((item, index) => 
-          <RecommendedAppItem
-            key={index}
-            avatar={item.avatar}
-            name={item.name}
-            category={item.category}
-          ></RecommendedAppItem> 
-        ): emptyAppList()
+        (list && list.length > 0) ? 
+        <div id="recommended-app-container" className="w-100 d-flex flex-row p-2">
+        {
+          list.map((item, index) => 
+            <RecommendedAppItem
+              key={index}
+              avatar={item.avatar}
+              name={item.name}
+              category={item.category}
+            ></RecommendedAppItem> 
+          )
+        }
+        </div> : emptyAppList()
       }
-      </div>
+      
     </div>
   )
 }
