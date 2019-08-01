@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { StoreContext } from 'redux-react-hook';
 import AppContainer from './AppContainer/components';

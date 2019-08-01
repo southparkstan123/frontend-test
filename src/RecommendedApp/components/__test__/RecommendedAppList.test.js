@@ -50,7 +50,7 @@ describe('<RecommendedAppList />', () => {
             </StoreContext.Provider> 
         );
 
-        expect(wrapper.find('div').find('h1').text()).toEqual("找不到應用程式");
+        expect(wrapper.find('div').find('h5').text()).toEqual("找不到應用程式");
     });
 
 });

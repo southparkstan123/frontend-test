@@ -1,3 +1,5 @@
+// @flow
+import type { SiteConfigState } from '../types';
 import { 
     SITE_CONFIG_LOADING,
     SITE_CONFIG_LOADED
@@ -7,7 +9,11 @@ const initialState = {
     isLoading: true
 }
 
-export default function SiteConfigReducer (state = initialState, action) {
+type SiteConfigAction = {
+    type: string
+}
+
+export default function SiteConfigReducer (state: SiteConfigState = initialState, action: SiteConfigAction) {
     switch(action.type){
     case SITE_CONFIG_LOADING:
         return {

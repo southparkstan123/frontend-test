@@ -36,7 +36,7 @@ describe('AppListReducer', () => {
         expect(result.filteredAppList).toHaveLength(10);
         expect(result.appList).toHaveLength(9);
         result.appList.forEach(item => {
-            expect(item).toHaveLength(10);
+            expect(item.length).toBeLessThanOrEqual(10);
         });
         expect(result.hasMoreItems).toBe(true);
     });
@@ -51,7 +51,7 @@ describe('AppListReducer', () => {
         expect(result.filteredAppList).toHaveLength(20);
         expect(result.appList).toHaveLength(8);
         result.appList.forEach(item => {
-            expect(item).toHaveLength(10);
+            expect(item.length).toBeLessThanOrEqual(10);
         });
         expect(result.hasMoreItems).toBe(true);
 
@@ -60,7 +60,7 @@ describe('AppListReducer', () => {
         expect(result.filteredAppList).toHaveLength(30);
         expect(result.appList).toHaveLength(7);
         result.appList.forEach(item => {
-            expect(item).toHaveLength(10);
+            expect(item.length).toBeLessThanOrEqual(10);
         });
         expect(result.hasMoreItems).toBe(true);
     });
@@ -73,14 +73,14 @@ describe('AppListReducer', () => {
             result = AppListReducer(result, {type: APP_LIST_SHOW_NEXT_TEN_ITEMS });
         }
         
-        expect(result.filteredAppList).toHaveLength(100);
+        expect(result.filteredAppList).toHaveLength(99);
         expect(result.appList).toHaveLength(0);
         expect(result.hasMoreItems).toBe(false);
 
         // Dispatch again
         result = AppListReducer(result, {type: APP_LIST_SHOW_NEXT_TEN_ITEMS });
         
-        expect(result.filteredAppList).toHaveLength(100);
+        expect(result.filteredAppList).toHaveLength(99);
         expect(result.appList).toHaveLength(0);
         expect(result.hasMoreItems).toBe(false);
     });
@@ -93,7 +93,7 @@ describe('AppListReducer', () => {
         expect(result.appList).toHaveLength(9);
         expect(result.hasMoreItems).toBe(true);
 
-        keyword = "Te"
+        keyword = "Te";
         result = AppListReducer(initialState, {type: SEARCH_RESULT_BY_KEYWORD, keyword, data });
 
         expect(result.filteredAppList).toHaveLength(10);

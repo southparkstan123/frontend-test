@@ -1,11 +1,18 @@
+// @flow
+import type { RecommendedAppState, AppItemObj } from  "../types";
 import _ from "lodash";
 import { GET_RECOMMENDED_APPS } from '../actionTypes';
 
-const initialState = {
+const initialState: RecommendedAppState = {
     data: []
 }
 
-export default function RecommendedAppReducer(state = initialState, action){
+type RecommendedAppAction = {
+    type: string,
+    data: Array<AppItemObj>
+}
+
+export default function RecommendedAppReducer(state: RecommendedAppState = initialState, action: RecommendedAppAction){
     switch(action.type){
     case GET_RECOMMENDED_APPS:
         return {

@@ -1,20 +1,23 @@
+// @flow
+import type { FreeAppsResponse, FreeAppEntry } from '../types';
 import * as axios from 'axios';
 import _ from 'lodash';
 import config from '../config';
 
-export async function fetchApps(apiEndPoint, keyOfLocalStorage){
+export async function fetchApps(apiEndPoint: string, keyOfLocalStorage: string) {
     try {
-        const listFromStorage = JSON.parse(localStorage.getItem(keyOfLocalStorage));
-        if(!_.isEmpty(listFromStorage)){
+        const listFromStorage: any = localStorage.getItem(keyOfLocalStorage);
+
+        if(!_.isEmpty(JSON.parse(listFromStorage))){
             return listFromStorage
         } else {
-            const result = await axios.get(apiEndPoint);
-            const ids = _.chain(result)
+            const result: FreeAppsResponse = await axios.get(apiEndPoint);
+            const ids: Array<string> = _.chain(result)
                 .get('data.feed.entry', [])
                 .map(item => _.get(item, 'id.attributes.im:id', ''))
                 .value();
       
-            const appsLookupResponse = await axios.get(config.LOOKUP_API, {
+            const appsLookupResponse: FreeAppEntry  = await axios.get(config.LOOKUP_API, {
                 params: {
                     id: ids.join(',')
                 }
@@ -25,7 +28,7 @@ export async function fetchApps(apiEndPoint, keyOfLocalStorage){
                 .map((item) => {
                     return {
                         appId: _.get(item, 'trackId', ''),
-                        name: item.trackName,
+                        name: _.get(item, 'trackName', ''),
                         category: _.chain(item).get('genres', []).first().value(),
                         avatar: _.get(item, 'artworkUrl100', ''),
                         summary: _.get(item, 'description', ''),

@@ -1,3 +1,4 @@
+//@flow
 export default {
     DOMAIN: "https://itunes.apple.com",
     HUNDRED_FREE_APPS_API: '/hk/rss/topfreeapplications/limit=100/json',

@@ -1,4 +1,6 @@
+// @flow
 import { combineReducers } from 'redux'
+import type { Reducer } from 'redux'
 
 import AppListReducer from './AppListReducer'
 import RecommendedAppReducer from './RecommendedAppReducer'
