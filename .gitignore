@@ -24,3 +24,6 @@ yarn-error.log*
 
 # snapshots from unit test
 *__snapshots__
+
+#setting in vscode
+/.vscode
