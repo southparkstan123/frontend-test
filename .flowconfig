@@ -1,0 +1,16 @@
+[ignore]
+<PROJECT_ROOT>/node_modules/config-chain/test/broken.json
+*./__test__/.*
+*./node_modules/redux/.*
+*./node_modules/redux-react-hook/.*
+
+[include]
+
+[libs]
+
+[lints]
+all=warn
+
+[options]
+
+[strict]

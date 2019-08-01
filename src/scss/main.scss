@@ -1,0 +1,126 @@
+@import '../../node_modules/bootstrap/scss/bootstrap';
+@import "_variables.scss";
+
+#main { 
+    .spinner {
+        position: fixed;
+        top: calc(50% - 0.5rem * 2);
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+
+    .rounded {
+        border-radius: 1.25rem !important;
+    }
+
+    .fade-appear {
+        opacity: 0.01;
+    }
+
+    .fade-appear.fade-appear-active {
+        opacity: 1;
+        transition: opacity .5s ease-in;
+    }
+}
+
+#search-bar{
+
+    border-bottom: 1px solid $border;
+
+    #search-input {
+        border-radius: 0;
+    }
+    /* Chrome */
+    input::-webkit-input-placeholder {
+        color: $base-primary-font-color;
+        text-align: center;
+    }
+    input:focus::-webkit-input-placeholder {
+        color: $base-secondary-font-color;
+        text-align: center;
+    }
+    
+    /* Firefox < 19 */
+    input:-moz-placeholder {
+        color: $base-primary-font-color;
+    }
+    input:focus:-moz-placeholder {
+        color: $base-secondary-font-color;
+    }
+
+    /* Firefox > 19 */
+    input::-moz-placeholder {
+        color: $base-primary-font-color;
+    }
+    input:focus::-moz-placeholder {
+        color: $base-secondary-font-color;
+    }
+
+    /* Internet Explorer 10 */
+    input:-ms-input-placeholder {
+        color: $base-primary-font-color;
+    }
+    input:focus:-ms-input-placeholder {
+        color: $base-secondary-font-color;
+    }
+}
+
+
+#recommended-app-container{
+
+    overflow-y: scroll;
+
+    .recommended-app-item{
+
+        div.name {
+            font-size: 13px;
+            color: $base-primary-font-color;
+        }
+
+        div.category {
+            font-size: 12px;
+            color: $base-secondary-font-color;
+        }
+    }
+}
+
+.app-item {
+    cursor: pointer;
+
+    &.item-border {
+        
+        border-bottom: none;
+
+        @media screen and (max-width: 768px) {
+            border-bottom: 1px solid $border
+        }
+    }
+
+    .index{
+        width:20px;
+        color: $base-secondary-font-color;
+    }
+    
+    .name {
+        font-size: 13px;
+        color: $base-primary-font-color;
+    }
+
+    .category {
+        font-size: 12px;
+        color: $base-secondary-font-color;
+    }
+
+    .rating {
+        span {
+            font-size: 12px;
+            color: $base-third-font-color;
+        }
+    }
+}
+
+.loading-apps {
+    text-align: center;
+    animation: spinner-spin infinite 1s linear;
+}
