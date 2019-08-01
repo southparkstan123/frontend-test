@@ -32,5 +32,6 @@ export default function RecommendedAppList(props: RecommendedAppListProps) {
                     }
                 </div> : emptyAppList()
             }
-        </div>)
+        </div>
+    )
 }

@@ -9,7 +9,7 @@ export async function fetchApps(apiEndPoint: string, keyOfLocalStorage: string) 
         const listFromStorage: any = localStorage.getItem(keyOfLocalStorage);
 
         if(!_.isEmpty(JSON.parse(listFromStorage))){
-            return listFromStorage
+            return JSON.parse(listFromStorage)
         } else {
             const result: FreeAppsResponse = await axios.get(apiEndPoint);
             const ids: Array<string> = _.chain(result)
