@@ -1,3 +1,5 @@
+// @flow
+import type { RootState, AppItemObj } from '../../types';
 import React, { useEffect } from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 import { CSSTransitionGroup } from 'react-transition-group';
@@ -36,7 +38,7 @@ async function initData(dispatch) {
 function AppContainer() {
     const dispatch = useDispatch();
 
-    const isLoading = useMappedState((state) => {
+    const isLoading = useMappedState((state: RootState) => {
         return state.SiteConfigReducer.isLoading;
     });
 
@@ -48,10 +50,10 @@ function AppContainer() {
         }
     }, []);
 
-    async function handleInputChange(keyword){
+    async function handleInputChange(keyword: string){
         try {
             dispatch({ type: SEARCH_RESULT_LOADING });
-            const result = await fetchApps(config.HUNDRED_FREE_APPS_API, "appList");
+            const result: Array<AppItemObj> = await fetchApps(config.HUNDRED_FREE_APPS_API, "appList");
             dispatch({
                 type: SEARCH_RESULT_BY_KEYWORD, 
                 keyword,

@@ -20,7 +20,9 @@ export type RecommendedAppListProps = {
     title: string
 }
 
-
+export type SearchBarProps = {
+    onChangeKeyword: ( keyword: string ) => Promise<any>
+}
 
 export type AppLink = {
     attributes: {
