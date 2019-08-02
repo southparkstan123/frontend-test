@@ -3,6 +3,7 @@ import type { FreeAppsResponse, FreeAppEntry } from '../types';
 import * as axios from 'axios';
 import _ from 'lodash';
 import config from '../config';
+import axiosJsonpAdapter from "axios-jsonp";
 
 export async function fetchApps(apiEndPoint: string, keyOfLocalStorage: string) {
     try {
@@ -11,15 +12,28 @@ export async function fetchApps(apiEndPoint: string, keyOfLocalStorage: string) 
         if(!_.isEmpty(JSON.parse(listFromStorage))){
             return JSON.parse(listFromStorage)
         } else {
-            const result: FreeAppsResponse = await axios.get(apiEndPoint);
+            const result: FreeAppsResponse = await axios({
+                url: apiEndPoint,
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            
             const ids: Array<string> = _.chain(result)
                 .get('data.feed.entry', [])
                 .map(item => _.get(item, 'id.attributes.im:id', ''))
                 .value();
       
-            const appsLookupResponse: FreeAppEntry  = await axios.get(config.LOOKUP_API, {
+            const appsLookupResponse: FreeAppEntry = await axios({
+                url: config.LOOKUP_API,
+                adapter: axiosJsonpAdapter,
+                callbackParamName: 'fn',
                 params: {
                     id: ids.join(',')
+                },
+                headers: {
+                    'Content-Type': 'application/json'
                 }
             });
 

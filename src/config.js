@@ -1,7 +1,6 @@
 //@flow
 export default {
-    DOMAIN: 'https://itunes.apple.com',
-    HUNDRED_FREE_APPS_API: '/hk/rss/topfreeapplications/limit=100/json',
-    RECOMMENDED_APPS_API: '/hk/rss/topgrossingapplications/limit=10/json',
-    LOOKUP_API: '/hk/lookup'
+    HUNDRED_FREE_APPS_API: 'https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json',
+    RECOMMENDED_APPS_API: 'https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json',
+    LOOKUP_API: 'https://itunes.apple.com/hk/lookup'
 }
