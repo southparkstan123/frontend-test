@@ -1,50 +1,26 @@
 // @flow
-import type { AppListState, AppItemObj } from "../types";
 import _ from "lodash";
+
+import type { 
+    AppListState, 
+    AppItemObj,
+    ShowNextTenItemsAction,
+    GetFirstTenAppsAction,
+    SearchResultAction
+} from "../types";
+
 import { 
     APP_LIST_GET_FIRST_TEN_APPS,
     SEARCH_RESULT_BY_KEYWORD,
     APP_LIST_SHOW_NEXT_TEN_ITEMS
 } from '../actionTypes';
 
-type ShowNextTenItemsAction = { 
-    type: "APP_LIST_GET_FIRST_TEN_APPS", 
-    data: Array<AppItemObj>
-}
-
-type GetFirstTenAppsAction = { 
-    type: "APP_LIST_GET_FIRST_TEN_APPS", 
-    data: Array<AppItemObj> 
-}
-
-type SearchResultAction = { 
-    type: "SEARCH_RESULT_BY_KEYWORD", 
-    keyword: string,
-    data: Array<AppItemObj> 
-}
-
+import { isMatchResult } from '../utils';
 
 const initialState: AppListState = {
     appList: [],
     filteredAppList: [],
     hasMoreItems: false
-}
-
-export function isMatchResult(item: AppItemObj, keys: Array<string>, keyword: string): boolean{
-    const hasKeys: boolean = _.every(keys, _.partial(_.has, item));
-
-    if(hasKeys){
-        let _result: Array<boolean> = [];
-
-        _.forEach(keys, (key: string) => {
-            const _value: string = item[key].toLowerCase();
-            _result.push(_value.includes(keyword.toLowerCase()))
-        });
-
-        return _.some(_result, (ele: boolean) => ele === true);
-    } else {
-        return false;
-    }
 }
 
 export default function AppListReducer(state: AppListState = initialState, action: SearchResultAction | GetFirstTenAppsAction | ShowNextTenItemsAction): AppListState{

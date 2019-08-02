@@ -152,3 +152,19 @@ export type RootState ={
     RecommendedAppReducer: RecommendedAppState,
     SiteConfigReducer: SiteConfigState
 }
+
+export type ShowNextTenItemsAction = { 
+    type: "APP_LIST_GET_FIRST_TEN_APPS", 
+    data: Array<AppItemObj>
+}
+
+export type GetFirstTenAppsAction = { 
+    type: "APP_LIST_GET_FIRST_TEN_APPS", 
+    data: Array<AppItemObj> 
+}
+
+export type SearchResultAction = { 
+    type: "SEARCH_RESULT_BY_KEYWORD", 
+    keyword: string,
+    data: Array<AppItemObj> 
+}
