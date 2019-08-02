@@ -59,5 +59,6 @@
     "jest": "^24.8.0",
     "jest-enzyme": "^7.0.2",
     "redux-mock-store": "^1.5.3"
-  }
+  },
+  "homepage" : "https://frontend-test-southparkstan123.herokuapp.com"
 }
