@@ -53,7 +53,7 @@ function AppContainer() {
     async function handleInputChange(keyword: string){
         try {
             dispatch({ type: SEARCH_RESULT_LOADING });
-            const result: Array<AppItemObj> = await fetchApps(config.HUNDRED_FREE_APPS_API, "appList");
+            const result: Array<AppItemObj> = await fetchApps(config.HUNDRED_FREE_APPS_API);
             dispatch({
                 type: SEARCH_RESULT_BY_KEYWORD, 
                 keyword,
