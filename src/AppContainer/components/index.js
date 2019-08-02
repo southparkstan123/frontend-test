@@ -48,7 +48,7 @@ function AppContainer() {
         return () => {
             dispatch({ type: SITE_CONFIG_LOADED });
         }
-    }, []);
+    }, [dispatch]);
 
     async function handleInputChange(keyword: string){
         try {
