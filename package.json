@@ -19,7 +19,8 @@
     "react-star-ratings": "^2.3.0",
     "react-transition-group": "1.x",
     "redux": "^4.0.4",
-    "redux-react-hook": "^3.3.2"
+    "redux-react-hook": "^3.3.2",
+    "serve": "^11.1.0"
   },
   "scripts": {
     "dev": "react-scripts start",
@@ -61,5 +62,5 @@
     "jest-enzyme": "^7.0.2",
     "redux-mock-store": "^1.5.3"
   },
-  "homepage" : "https://frontend-test-southparkstan123.herokuapp.com"
+  "homepage": "https://frontend-test-southparkstan123.herokuapp.com"
 }
