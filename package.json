@@ -22,7 +22,8 @@
     "redux-react-hook": "^3.3.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "build-CSS": "node-sass src/scss/main.scss src/css/main.css",
     "eject": "react-scripts eject",
