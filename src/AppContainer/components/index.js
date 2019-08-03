@@ -1,5 +1,5 @@
 // @flow
-import type { RootState, AppItemObj } from '../../types';
+import type { RootState } from '../../types';
 import React, { useEffect } from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 import { CSSTransitionGroup } from 'react-transition-group';
@@ -8,7 +8,7 @@ import SearchBar from '../../SearchBar/components/SearchBar';
 import AppList from '../../AppList/components/AppList';
 import LoadingSpinner from '../../LoadingSpinner/components/LoadingSpinner';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { fetchAllData, fetchApps } from '../../dao/AppsDao'
+import { fetchAllData } from '../../dao/AppsDao'
 import {
     GET_RECOMMENDED_APPS,
     SITE_CONFIG_LOADING,
@@ -19,7 +19,6 @@ import {
     SEARCH_RESULT_LOADING,
     SEARCH_RESULT_LOADED
 } from '../../actionTypes';
-import config from '../../config';
 
 async function initData(dispatch) {
     dispatch({ type: SITE_CONFIG_LOADING });
