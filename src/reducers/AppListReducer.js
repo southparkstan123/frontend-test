@@ -42,8 +42,6 @@ export default function AppListReducer(state: AppListState = initialState, actio
             appListToBeSearch: _.chain(action).get('data', []).value()
         }
     case SEARCH_RESULT_BY_KEYWORD:
-        state.hasMoreItems = !_.isEmpty(state.appList);
-
         let _list: Array<Array<AppItemObj>> = [];
 
         const keyword: string = _.get(action, 'keyword','')
@@ -53,9 +51,7 @@ export default function AppListReducer(state: AppListState = initialState, actio
                 .get('appListToBeSearch', [])
                 .filter((item: AppItemObj) => isMatchResult(item, ['name', 'category', 'summary', 'artistName'], keyword))
                 .value();
-            console.log(result.length);
             _list = _.chain(result).chunk(10).value();
-            console.log(_list.length);
         } else {
             _list = _.chain(state).get('appListToBeSearch', []).chunk(10).value();
         }
@@ -74,9 +70,9 @@ export default function AppListReducer(state: AppListState = initialState, actio
             state.appList.shift();
         }
 
-        state.hasMoreItems = !_.isEmpty(state.appList);
         return {
-            ...state
+            ...state,
+            hasMoreItems: !_.isEmpty(state.appList)
         }
     case SEARCH_RESULT_LOADING:
         return {
@@ -86,7 +82,8 @@ export default function AppListReducer(state: AppListState = initialState, actio
     case SEARCH_RESULT_LOADED:
         return {
             ...state,
-            isSearching: false
+            isSearching: false,
+            hasMoreItems: !_.isEmpty(state.appList)
         }
     default:
         return state;

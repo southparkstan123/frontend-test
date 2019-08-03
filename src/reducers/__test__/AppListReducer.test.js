@@ -116,10 +116,6 @@ describe('AppListReducer', () => {
 
         expect(_.flatten(result.appList)).toHaveLength(89);
         expect(result.hasMoreItems).toBe(true);
-
-
-
-
     })
 
     it('should return true when apps are searching' , () => {
