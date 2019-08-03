@@ -136,7 +136,9 @@ export type FreeAppsResponse = {
 export type AppListState ={
     appList: Array<Array<AppItemObj>>,
     filteredAppList: Array<AppItemObj>,
-    hasMoreItems: boolean
+    hasMoreItems: boolean,
+    isSearching: boolean,
+    appListToBeSearch: Array<AppItemObj>
 }
 
 export type RecommendedAppState ={
@@ -167,4 +169,12 @@ export type SearchResultAction = {
     type: "SEARCH_RESULT_BY_KEYWORD", 
     keyword: string,
     data: Array<AppItemObj> 
+}
+
+export type SearchResultLoadingAction = { 
+    type: "SEARCH_RESULT_LOADING"
+}
+
+export type SearchResultLoadedAction = { 
+    type: "SEARCH_RESULT_LOADED"
 }

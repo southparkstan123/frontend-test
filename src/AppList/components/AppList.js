@@ -4,6 +4,8 @@ import { useDispatch, useMappedState } from 'redux-react-hook';
 import InfiniteScroll from 'react-infinite-scroller';
 import AppItem from './AppItem';
 import { APP_LIST_SHOW_NEXT_TEN_ITEMS } from '../../actionTypes';
+import { faSlash } from '@fortawesome/free-solid-svg-icons';
+import LoadingSpinner from "../../LoadingSpinner/components/LoadingSpinner";
 
 import type { RootState, AppItemObj } from '../../types'
 
@@ -31,6 +33,10 @@ export default function AppList() {
         dispatch({ type: APP_LIST_SHOW_NEXT_TEN_ITEMS })
     }
 
+    const isSearching: boolean = useMappedState((state: RootState) => {
+        return state.AppListReducer.isSearching;
+    });
+
     return (
         (filteredAppList && filteredAppList.length > 0) ?
             <InfiniteScroll
@@ -41,11 +47,16 @@ export default function AppList() {
                 threshold={100}
             >
                 {
-                    filteredAppList.map((appItem: AppItemObj, index: number) => 
-                        <AppItem 
-                            key={index}
-                            index={index + 1} 
-                            {...appItem}
-                        ></AppItem>)}
-            </InfiniteScroll> : emptyAppList())
+                    (!isSearching) ? 
+                        filteredAppList.map((appItem: AppItemObj, index: number) => 
+                            <AppItem 
+                                key={index}
+                                index={index + 1} 
+                                {...appItem}
+                            ></AppItem>
+                        )
+                        : <LoadingSpinner icon={faSlash} spin={true}></LoadingSpinner>
+                }
+            </InfiniteScroll>: emptyAppList()
+    )
 }

@@ -4,7 +4,9 @@ import AppListReducer from '../AppListReducer';
 import { 
     SEARCH_RESULT_BY_KEYWORD, 
     APP_LIST_GET_FIRST_TEN_APPS,
-    APP_LIST_SHOW_NEXT_TEN_ITEMS 
+    APP_LIST_SHOW_NEXT_TEN_ITEMS,
+    SEARCH_RESULT_LOADED,
+    SEARCH_RESULT_LOADING
 } from '../../actionTypes';
 
 describe('AppListReducer', () => {
@@ -16,18 +18,16 @@ describe('AppListReducer', () => {
         initialState = {
             appList: [],
             filteredAppList: [],
-            hasMoreItems: false
+            hasMoreItems: false,
+            isSearching: false,
+            appListToBeSearch: []
         }
 
     });
 
     it('should return initial state', () => {
         const result = AppListReducer(undefined, {});
-        expect(result).toEqual({
-            appList: [],
-            filteredAppList: [],
-            hasMoreItems: false
-        })
+        expect(result).toEqual(initialState);
     });
 
     it('should get first 10 apps to "filteredAppList" from "appList"', () => {
@@ -35,6 +35,8 @@ describe('AppListReducer', () => {
 
         expect(result.filteredAppList).toHaveLength(10);
         expect(result.appList).toHaveLength(9);
+        expect(result.appListToBeSearch.length).toBeLessThanOrEqual(100);
+
         result.appList.forEach(item => {
             expect(item.length).toBeLessThanOrEqual(10);
         });
@@ -87,20 +89,53 @@ describe('AppListReducer', () => {
 
     it('should search by keyword', () => {
         let keyword = "T"
-        let result = AppListReducer(initialState, {type: SEARCH_RESULT_BY_KEYWORD, keyword, data });
+
+        //Init data first
+        let result = AppListReducer(initialState, {type: APP_LIST_GET_FIRST_TEN_APPS, data });
+        //Then search
+        result = AppListReducer(result, {type: SEARCH_RESULT_BY_KEYWORD, keyword });
 
         expect(result.filteredAppList).toHaveLength(10);
-        expect(result.appList).toHaveLength(9);
+        expect(result.appList).toHaveLength(8);
         expect(result.hasMoreItems).toBe(true);
 
         keyword = "Te";
-        result = AppListReducer(initialState, {type: SEARCH_RESULT_BY_KEYWORD, keyword, data });
+        result = AppListReducer(result, {type: SEARCH_RESULT_BY_KEYWORD, keyword });
 
         expect(result.filteredAppList).toHaveLength(10);
-        expect(result.appList).toHaveLength(7);
+        expect(result.appList).toHaveLength(6);
 
-        expect(_.flatten(result.appList)).toHaveLength(62);
+        expect(_.flatten(result.appList)).toHaveLength(52);
         expect(result.hasMoreItems).toBe(true);
+
+        keyword = "";
+        result = AppListReducer(result, {type: SEARCH_RESULT_BY_KEYWORD, keyword });
+
+        expect(result.filteredAppList).toHaveLength(10);
+        expect(result.appList).toHaveLength(9);
+
+        expect(_.flatten(result.appList)).toHaveLength(89);
+        expect(result.hasMoreItems).toBe(true);
+
+
+
+
     })
+
+    it('should return true when apps are searching' , () => {
+        const result = AppListReducer(initialState, { type: SEARCH_RESULT_LOADING });
+        expect(result).toEqual({
+            ...initialState,
+            isSearching: true
+        })
+    });
+
+    it('should return false when apps are searched' , () => {
+        const result = AppListReducer(initialState, { type: SEARCH_RESULT_LOADED });
+        expect(result).toEqual({
+            ...initialState,
+            isSearching: false
+        })
+    });
 
 });

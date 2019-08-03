@@ -3,12 +3,11 @@ import type { RootState, AppItemObj } from '../../types';
 import React, { useEffect } from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 import { CSSTransitionGroup } from 'react-transition-group';
-
 import RecommendedAppList from '../../RecommendedApp/components/RecommendedAppList';
 import SearchBar from '../../SearchBar/components/SearchBar';
 import AppList from '../../AppList/components/AppList';
 import LoadingSpinner from '../../LoadingSpinner/components/LoadingSpinner';
-
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { fetchAllData, fetchApps } from '../../dao/AppsDao'
 import {
     GET_RECOMMENDED_APPS,
@@ -43,7 +42,6 @@ function AppContainer() {
     });
 
     useEffect(() => {
-        dispatch({ type: SITE_CONFIG_LOADING });
         initData(dispatch);
         return () => {
             dispatch({ type: SITE_CONFIG_LOADED });
@@ -53,11 +51,9 @@ function AppContainer() {
     async function handleInputChange(keyword: string){
         try {
             dispatch({ type: SEARCH_RESULT_LOADING });
-            const result: Array<AppItemObj> = await fetchApps(config.HUNDRED_FREE_APPS_API);
             dispatch({
                 type: SEARCH_RESULT_BY_KEYWORD, 
-                keyword,
-                data: result
+                keyword
             });
         } catch (error) {
             dispatch({ type: ERROR , error: error })
@@ -84,7 +80,7 @@ function AppContainer() {
                         </div>
                     </CSSTransitionGroup>
                     :
-                    <LoadingSpinner isFullPage={true}></LoadingSpinner>
+                    <LoadingSpinner icon={faSpinner} size="6x" spin={true}></LoadingSpinner>
             }
         </div>
     );

@@ -1,12 +1,18 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { SizeProp, IconProp } from '@fortawesome/free-solid-svg-icons';
 
-export default function LoadingSpinner() {
+type LoadingSpinnerProps = {
+    size?: SizeProp,
+    icon: IconProp,
+    spin?: boolean
+}
+
+export default function LoadingSpinner(props: LoadingSpinnerProps) {
     return(
         <div className="spinner">
             <div className="align-middle d-flex justify-content-center">
-                <FontAwesomeIcon icon={faSpinner} size="6x" spin={true}/> 
+                <FontAwesomeIcon {...props}/> 
             </div>
         </div>
     )
