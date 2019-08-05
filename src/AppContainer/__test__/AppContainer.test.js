@@ -9,7 +9,7 @@ import FreeAppList from '../../../mock/FreeAppList.json';
 import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore();
 
-xdescribe('<AppContainer />', () => {
+describe('<AppContainer />', () => {
     let wrapper, store;
 
     beforeEach(() => {

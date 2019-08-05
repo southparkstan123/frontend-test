@@ -7,7 +7,7 @@ import configureMockStore from 'redux-mock-store';
 import SearchBar from '../SearchBar';
 import data from '../../../../mock/FreeAppList.json';
 
-xdescribe('<SearchBar />', () => {
+describe('<SearchBar />', () => {
 
     const mockStore = configureMockStore();
     let wrapper, store;

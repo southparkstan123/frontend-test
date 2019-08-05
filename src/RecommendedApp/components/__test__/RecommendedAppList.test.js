@@ -8,7 +8,7 @@ import data from '../../../../mock/RecommendedAppList.json';
 import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore();
 
-xdescribe('<RecommendedAppList />', () => {
+describe('<RecommendedAppList />', () => {
 
     let wrapper, store;
 
