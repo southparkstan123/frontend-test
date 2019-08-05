@@ -3,9 +3,9 @@ import React from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 import InfiniteScroll from 'react-infinite-scroller';
 import AppItem from './AppItem';
-import { APP_LIST_SHOW_NEXT_TEN_ITEMS } from '../../actionTypes';
-import { faSlash } from '@fortawesome/free-solid-svg-icons';
-import LoadingSpinner from "../../LoadingSpinner/components/LoadingSpinner";
+import { APP_LIST_SHOW_NEXT_TEN_ITEMS, ERROR } from '../../actionTypes';
+import _ from 'lodash';
+import { fetchAppsData } from '../../dao/AppsDao';
 
 import type { RootState, AppItemObj } from '../../types'
 
@@ -13,29 +13,34 @@ export default function AppList() {
 
     const dispatch = useDispatch();
 
-    const filteredAppList = useMappedState((state: RootState)=> {
+    const filteredAppList: Array<AppItemObj> = useMappedState((state: RootState)=> {
         return state.AppListReducer.filteredAppList;
     });
 
-    const hasMoreItems = useMappedState((state: RootState)=> {
+    const hasMoreItems: boolean = useMappedState((state: RootState)=> {
         return state.AppListReducer.hasMoreItems;
     });
 
-    const emptyAppList = () => {
+    const idsforNext10Items: Array<string> = useMappedState((state: RootState)=> {
+        return _.chain(state).get('AppListReducer.appListIds', []).first().value();
+    });
+
+    const EmptyAppList = () => {
         return (
-            <div className='my-5 d-flex justify-content-center'>
+            <div className='my-5 justify-content-center'>
                 <h1>找不到應用程式</h1>
             </div>
         )
     }
 
-    const loadNext10Apps = () => {
-        dispatch({ type: APP_LIST_SHOW_NEXT_TEN_ITEMS })
+    async function loadNext10Apps () {
+        try {
+            const result: Array<AppItemObj> = await fetchAppsData(idsforNext10Items);
+            dispatch({ type: APP_LIST_SHOW_NEXT_TEN_ITEMS , data: result })
+        } catch (error) {
+            dispatch({ type: ERROR , error: error });
+        }
     }
-
-    const isSearching: boolean = useMappedState((state: RootState) => {
-        return state.AppListReducer.isSearching;
-    });
 
     return (
         (filteredAppList && filteredAppList.length > 0) ?
@@ -45,18 +50,17 @@ export default function AppList() {
                 hasMore={hasMoreItems}
                 className="row"
                 threshold={100}
+                loader={<div className='my-5 d-flex' key={0}><h5>Loading...</h5></div>}
             >
                 {
-                    (!isSearching) ? 
-                        filteredAppList.map((appItem: AppItemObj, index: number) => 
-                            <AppItem 
-                                key={index}
-                                index={index + 1} 
-                                {...appItem}
-                            ></AppItem>
-                        )
-                        : <LoadingSpinner icon={faSlash} spin={true}></LoadingSpinner>
+                    filteredAppList.map((appItem: AppItemObj, index: number) => 
+                        <AppItem 
+                            key={index}
+                            index={index + 1} 
+                            {...appItem}
+                        ></AppItem> 
+                    )
                 }
-            </InfiniteScroll>: emptyAppList()
+            </InfiniteScroll>: EmptyAppList()
     )
 }

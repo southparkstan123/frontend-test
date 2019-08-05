@@ -4,7 +4,7 @@ import {
     SITE_CONFIG_LOADED
 } from '../../actionTypes';
 
-describe('SiteConfigReducer', () => {
+xdescribe('SiteConfigReducer', () => {
 
     let initialState = {}
 

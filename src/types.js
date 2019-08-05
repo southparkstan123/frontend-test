@@ -134,7 +134,7 @@ export type FreeAppsResponse = {
 }
 
 export type AppListState ={
-    appList: Array<Array<AppItemObj>>,
+    appListIds: Array<Array<string>>,
     filteredAppList: Array<AppItemObj>,
     hasMoreItems: boolean,
     isSearching: boolean,

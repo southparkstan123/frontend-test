@@ -5,15 +5,20 @@ import { SizeProp, IconProp } from '@fortawesome/free-solid-svg-icons';
 type LoadingSpinnerProps = {
     size?: SizeProp,
     icon: IconProp,
-    spin?: boolean
+    spin?: boolean,
+    isfullscreen?: boolean
 }
 
 export default function LoadingSpinner(props: LoadingSpinnerProps) {
     return(
-        <div className="spinner">
-            <div className="align-middle d-flex justify-content-center">
-                <FontAwesomeIcon {...props}/> 
+        (props.isfullscreen === true) ?
+            <div className="spinner">
+                <div className="align-middle d-flex justify-content-center">
+                    <FontAwesomeIcon size={props.size} icon={props.icon} spin={props.spin}/> 
+                </div>
             </div>
-        </div>
+            : <div className="my-5 d-flex justify-content-center">
+                <FontAwesomeIcon size={props.size} icon={props.icon} spin={props.spin}/> 
+            </div>
     )
 }

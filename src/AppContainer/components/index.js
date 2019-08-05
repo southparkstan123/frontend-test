@@ -24,8 +24,10 @@ async function initData(dispatch) {
     dispatch({ type: SITE_CONFIG_LOADING });
     try {
         const result = await fetchAllData();
-        dispatch({ type: APP_LIST_GET_FIRST_TEN_APPS, data: result.freeAppsResult });
-        dispatch({ type: GET_RECOMMENDED_APPS, data: result.recomendedAppsResult });
+        const { hunderAppsIds, first10FreeAppsResult, recomendedAppsResult } = result;
+
+        dispatch({ type: APP_LIST_GET_FIRST_TEN_APPS, data: { hunderAppsIds, first10FreeAppsResult } });
+        dispatch({ type: GET_RECOMMENDED_APPS, data: recomendedAppsResult });
     } catch (error) {
         return error;
     } finally {
@@ -55,7 +57,7 @@ function AppContainer() {
                 keyword
             });
         } catch (error) {
-            dispatch({ type: ERROR , error: error })
+            dispatch({ type: ERROR , error: error });
         } finally{
             dispatch({ type: SEARCH_RESULT_LOADED });
         }
@@ -79,7 +81,7 @@ function AppContainer() {
                         </div>
                     </CSSTransitionGroup>
                     :
-                    <LoadingSpinner icon={faSpinner} size="6x" spin={true}></LoadingSpinner>
+                    <LoadingSpinner icon={faSpinner} size="6x" spin={true} isfullscreen={true}></LoadingSpinner>
             }
         </div>
     );

@@ -15,7 +15,7 @@ function dataToProps(item, index){
     }
 }
 
-describe('<RecommendedAppItem />', () => {
+xdescribe('<RecommendedAppItem />', () => {
     it('should be rendered', () => {
         const index = 0;
         const item = data[index];

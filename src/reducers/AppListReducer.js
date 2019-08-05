@@ -20,7 +20,7 @@ import {
 import { isMatchResult } from '../utils';
 
 const initialState: AppListState = {
-    appList: [],
+    appListIds: [],
     filteredAppList: [],
     hasMoreItems: false,
     isSearching: false,
@@ -30,16 +30,16 @@ const initialState: AppListState = {
 export default function AppListReducer(state: AppListState = initialState, action: SearchResultAction | GetFirstTenAppsAction | ShowNextTenItemsAction): AppListState{
     switch(action.type){
     case APP_LIST_GET_FIRST_TEN_APPS:
-        let list: Array<Array<AppItemObj>> = _.chain(action).get('data', []).chunk(10).value();
-        const filteredAppList: Array<AppItemObj> = _.first(list);
+        let list: Array<Array<string>> = _.chain(action).get('data.hunderAppsIds', []).value();
+        const filteredAppList: Array<AppItemObj> = _.chain(action).get('data.first10FreeAppsResult', []).value();
         list.shift();
 
         return {
             ...state,
-            appList: list,
+            appListIds: list,
             filteredAppList,
             hasMoreItems: true,
-            appListToBeSearch: _.chain(action).get('data', []).value()
+            appListToBeSearch: filteredAppList
         }
     case SEARCH_RESULT_BY_KEYWORD:
         let _list: Array<Array<AppItemObj>> = [];
@@ -56,23 +56,24 @@ export default function AppListReducer(state: AppListState = initialState, actio
             _list = _.chain(state).get('appListToBeSearch', []).chunk(10).value();
         }
 
-        state.appList = _list
+        state.appListIds = _list
         state.filteredAppList = _.first(_list)
-        state.appList.shift();
+        state.appListIds.shift();
 
         return { 
             ...state
         }
     case APP_LIST_SHOW_NEXT_TEN_ITEMS:
         if(state.hasMoreItems){
-            const next10Apps: Array<AppItemObj> = _.first(state.appList);
+            const next10Apps: Array<AppItemObj> = action.data;
             state.filteredAppList = state.filteredAppList.concat(next10Apps);
-            state.appList.shift();
+            state.appListToBeSearch = state.filteredAppList.concat(next10Apps);
+            state.appListIds.shift();
         }
 
         return {
             ...state,
-            hasMoreItems: !_.isEmpty(state.appList)
+            hasMoreItems: !_.isEmpty(state.appListIds)
         }
     case SEARCH_RESULT_LOADING:
         return {
@@ -83,7 +84,7 @@ export default function AppListReducer(state: AppListState = initialState, actio
         return {
             ...state,
             isSearching: false,
-            hasMoreItems: !_.isEmpty(state.appList)
+            hasMoreItems: !_.isEmpty(state.appListIds)
         }
     default:
         return state;

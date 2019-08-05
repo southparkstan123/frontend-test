@@ -1,6 +1,6 @@
 // @flow
 import type { FreeAppsResponse, FreeAppEntry, AppItemObj } from '../types';
-import * as axios from 'axios';
+import axios from 'axios';
 import _ from 'lodash';
 import config from '../config';
 import axiosJsonpAdapter from "axios-jsonp";
@@ -58,19 +58,19 @@ export async function fetchApps(apiEndPoint: string) {
 
 export async function fetchAllData() {
     try {
-        const hunderAppsId: Array<Array<string>> = await fetch100AppsId();
-        const firstTenAppsIds: Array<string> = _.first(hunderAppsId);
+        const hunderAppsIds: Array<Array<string>> = await fetch100AppsId();
+        const firstTenAppsIds: Array<string> = _.first(hunderAppsIds);
 
         const recommendedAppsIds: Array<string> = await fetchRecommendedAppsIds()
 
-        const allData: Array<Array<AppItemObj>> = await Promise.all([
+        const data: Array<Array<AppItemObj>> = await Promise.all([
             fetchAppsData(firstTenAppsIds), 
             fetchAppsData(recommendedAppsIds)
         ]);
-
         return {
-            freeAppsResult: allData[0],
-            recomendedAppsResult: allData[1]
+            hunderAppsIds,
+            first10FreeAppsResult: data[0],
+            recomendedAppsResult: data[1]
         }
     } catch (error) {
         return error;

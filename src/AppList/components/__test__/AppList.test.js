@@ -9,7 +9,7 @@ import { StoreContext } from 'redux-react-hook';
 import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore();
 
-describe('<AppList />', () => {
+xdescribe('<AppList />', () => {
 
     let wrapper, store;
 
