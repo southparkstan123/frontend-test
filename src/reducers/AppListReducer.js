@@ -61,7 +61,8 @@ export default function AppListReducer(state: AppListState = initialState, actio
         state.appListIds.shift();
 
         return { 
-            ...state
+            ...state,
+            hasMoreItems: !_.isEmpty(state.appListIds)
         }
     case APP_LIST_SHOW_NEXT_TEN_ITEMS:
         if(state.hasMoreItems){

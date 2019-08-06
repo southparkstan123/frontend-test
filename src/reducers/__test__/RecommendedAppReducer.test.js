@@ -3,7 +3,7 @@ import _ from 'lodash';
 import RecommendedAppReducer from '../RecommendedAppReducer';
 import { GET_RECOMMENDED_APPS } from '../../actionTypes';
 
-xdescribe('RecommendedAppReducer', () => {
+describe('RecommendedAppReducer', () => {
 
     let initialState = {}
 
