@@ -52,7 +52,7 @@ export default function AppList() {
                 loadMore={loadNext10Apps}
                 hasMore={hasMoreItems}
                 className="row"
-                threshold={100}
+                initialLoad={false}
             >
                 {
                     filteredAppList.map((appItem: AppItemObj, index: number) => 
