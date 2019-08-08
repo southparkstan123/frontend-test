@@ -13,8 +13,8 @@ import {
     APP_LIST_GET_FIRST_TEN_APPS,
     SEARCH_RESULT_BY_KEYWORD,
     APP_LIST_SHOW_NEXT_TEN_ITEMS,
-    SEARCH_RESULT_LOADING,
-    SEARCH_RESULT_LOADED
+    APP_RESULT_LOADING,
+    APP_RESULT_LOADED
 } from '../actionTypes';
 
 import { isMatchResult } from '../utils';
@@ -23,7 +23,7 @@ const initialState: AppListState = {
     appListIds: [],
     filteredAppList: [],
     hasMoreItems: false,
-    isSearching: false,
+    isAppLoading: false,
     appListToBeSearch: []
 }
 
@@ -76,15 +76,15 @@ export default function AppListReducer(state: AppListState = initialState, actio
             ...state,
             hasMoreItems: !_.isEmpty(state.appListIds)
         }
-    case SEARCH_RESULT_LOADING:
+    case APP_RESULT_LOADING:
         return {
             ...state,
-            isSearching: true
+            isAppLoading: true
         }
-    case SEARCH_RESULT_LOADED:
+    case APP_RESULT_LOADED:
         return {
             ...state,
-            isSearching: false,
+            isAppLoading: false,
             hasMoreItems: !_.isEmpty(state.appListIds)
         }
     default:

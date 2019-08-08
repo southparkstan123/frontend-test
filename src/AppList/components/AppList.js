@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 import InfiniteScroll from 'react-infinite-scroller';
 import AppItem from './AppItem';
-import { APP_LIST_SHOW_NEXT_TEN_ITEMS, ERROR } from '../../actionTypes';
+import { APP_LIST_SHOW_NEXT_TEN_ITEMS, ERROR, APP_RESULT_LOADING, APP_RESULT_LOADED } from '../../actionTypes';
 import _ from 'lodash';
 import { fetchAppsData } from '../../dao/AppsDao';
 
@@ -34,11 +34,14 @@ export default function AppList() {
     }
 
     async function loadNext10Apps () {
+        dispatch({ type: APP_RESULT_LOADING });
         try {
             const result: Array<AppItemObj> = await fetchAppsData(idsforNext10Items);
             dispatch({ type: APP_LIST_SHOW_NEXT_TEN_ITEMS , data: result })
         } catch (error) {
             dispatch({ type: ERROR , error: error });
+        } finally {
+            dispatch({ type: APP_RESULT_LOADED });
         }
     }
 
@@ -50,7 +53,6 @@ export default function AppList() {
                 hasMore={hasMoreItems}
                 className="row"
                 threshold={100}
-                loader={<div className='my-5 d-flex' key={0}><h5>Loading...</h5></div>}
             >
                 {
                     filteredAppList.map((appItem: AppItemObj, index: number) => 

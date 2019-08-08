@@ -137,7 +137,7 @@ export type AppListState ={
     appListIds: Array<Array<string>>,
     filteredAppList: Array<AppItemObj>,
     hasMoreItems: boolean,
-    isSearching: boolean,
+    isAppLoading: boolean,
     appListToBeSearch: Array<AppItemObj>
 }
 
@@ -172,9 +172,9 @@ export type SearchResultAction = {
 }
 
 export type SearchResultLoadingAction = { 
-    type: "SEARCH_RESULT_LOADING"
+    type: "APP_RESULT_LOADING"
 }
 
 export type SearchResultLoadedAction = { 
-    type: "SEARCH_RESULT_LOADED"
+    type: "APP_RESULT_LOADED"
 }

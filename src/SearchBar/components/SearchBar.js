@@ -5,8 +5,8 @@ import { useMappedState } from 'redux-react-hook';
 
 export default function SearchBar(props: SearchBarProps) {
 
-    const isSearching: boolean = useMappedState((state: RootState) => {
-        return state.AppListReducer.isSearching;
+    const isAppLoading: boolean = useMappedState((state: RootState) => {
+        return state.AppListReducer.isAppLoading;
     });
 
     return (
@@ -17,7 +17,7 @@ export default function SearchBar(props: SearchBarProps) {
                     onChange={(event: SyntheticInputEvent<HTMLInputElement>) => props.onChangeKeyword(event.target.value.trim())} 
                     className="text-center form-control mx-5" 
                     type="text" 
-                    disabled={isSearching}
+                    disabled={isAppLoading}
                     placeholder='搜尋' />
             </div>
         </nav>

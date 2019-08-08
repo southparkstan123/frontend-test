@@ -5,11 +5,9 @@ import {
     SEARCH_RESULT_BY_KEYWORD, 
     APP_LIST_GET_FIRST_TEN_APPS,
     APP_LIST_SHOW_NEXT_TEN_ITEMS,
-    SEARCH_RESULT_LOADED,
-    SEARCH_RESULT_LOADING
+    APP_RESULT_LOADED,
+    APP_RESULT_LOADING
 } from '../../actionTypes';
-
-const ids = _.map(data, item => item.appId);
 
 describe('AppListReducer', () => {
 
@@ -21,7 +19,7 @@ describe('AppListReducer', () => {
             appListIds: [],
             filteredAppList: [],
             hasMoreItems: false,
-            isSearching: false,
+            isAppLoading: false,
             appListToBeSearch: []
         }
 
@@ -160,18 +158,18 @@ describe('AppListReducer', () => {
     })
 
     it('should return true when apps are searching' , () => {
-        const result = AppListReducer(initialState, { type: SEARCH_RESULT_LOADING });
+        const result = AppListReducer(initialState, { type: APP_RESULT_LOADING });
         expect(result).toEqual({
             ...initialState,
-            isSearching: true
+            isAppLoading: true
         })
     });
 
     it('should return false when apps are searched' , () => {
-        const result = AppListReducer(initialState, { type: SEARCH_RESULT_LOADED });
+        const result = AppListReducer(initialState, { type: APP_RESULT_LOADED });
         expect(result).toEqual({
             ...initialState,
-            isSearching: false
+            isAppLoading: false
         })
     });
 

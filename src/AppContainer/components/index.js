@@ -16,9 +16,10 @@ import {
     APP_LIST_GET_FIRST_TEN_APPS,
     ERROR,
     SEARCH_RESULT_BY_KEYWORD,
-    SEARCH_RESULT_LOADING,
-    SEARCH_RESULT_LOADED
+    APP_RESULT_LOADING,
+    APP_RESULT_LOADED
 } from '../../actionTypes';
+import AppLoader from '../../AppList/components/AppLoader';
 
 async function initData(dispatch) {
     dispatch({ type: SITE_CONFIG_LOADING });
@@ -51,7 +52,7 @@ function AppContainer() {
 
     async function handleInputChange(keyword: string){
         try {
-            dispatch({ type: SEARCH_RESULT_LOADING });
+            dispatch({ type: APP_RESULT_LOADING });
             dispatch({
                 type: SEARCH_RESULT_BY_KEYWORD, 
                 keyword
@@ -59,7 +60,7 @@ function AppContainer() {
         } catch (error) {
             dispatch({ type: ERROR , error: error });
         } finally{
-            dispatch({ type: SEARCH_RESULT_LOADED });
+            dispatch({ type: APP_RESULT_LOADED });
         }
     }
 
@@ -78,6 +79,7 @@ function AppContainer() {
                         <div className="container-fluid mt-2">
                             <RecommendedAppList title="推介"></RecommendedAppList>
                             <AppList></AppList>
+                            <AppLoader></AppLoader>
                         </div>
                     </CSSTransitionGroup>
                     :
