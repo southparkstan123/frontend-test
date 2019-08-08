@@ -1,5 +1,7 @@
 import React from 'react';
 import { useMappedState } from 'redux-react-hook';
+import LoadingSpinner from '../../LoadingSpinner/components/LoadingSpinner';
+import { faFan } from '@fortawesome/free-solid-svg-icons';
 
 export default function AppLoader() {
 
@@ -10,7 +12,7 @@ export default function AppLoader() {
     return (
         (isAppLoading) ? 
             <div className='row my-5 justify-content-center'>
-                <h5>Loading...</h5>
+                <LoadingSpinner icon={faFan} size="3x" spin={true} isfullscreen={false}></LoadingSpinner>
             </div> : false
     )
 }
