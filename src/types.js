@@ -138,6 +138,7 @@ export type AppListState ={
     filteredAppList: Array<AppItemObj>,
     hasMoreItems: boolean,
     isAppLoading: boolean,
+    isAppSearching: boolean,
     appListToBeSearch: Array<AppItemObj>
 }
 
@@ -167,7 +168,6 @@ export type GetFirstTenAppsAction = {
 
 export type SearchResultAction = { 
     type: "SEARCH_RESULT_BY_KEYWORD", 
-    keyword: string,
     data: Array<AppItemObj> 
 }
 

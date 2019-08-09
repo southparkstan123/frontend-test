@@ -122,41 +122,6 @@ describe('AppListReducer', () => {
         expect(result.hasMoreItems).toBe(false);
     });
 
-    it('should search by keyword', () => {
-        let keyword = "T"
-
-        const firstAction = {
-            data: {
-                hunderAppsIds: _.chain(data).map(item => item.appId).chunk(10).value(),
-                first10FreeAppsResult: _.take(data, 10)
-            }
-        }
-
-        //Init data first
-        let result = AppListReducer(initialState, {type: APP_LIST_GET_FIRST_TEN_APPS, ...firstAction });
-        //Then search
-        result = AppListReducer(result, {type: SEARCH_RESULT_BY_KEYWORD, keyword });
-
-        expect(result.filteredAppList).toHaveLength(10);
-        expect(result.appListIds).toHaveLength(0);
-        expect(result.hasMoreItems).toBe(false);
-
-        keyword = "Te";
-        result = AppListReducer(result, {type: SEARCH_RESULT_BY_KEYWORD, keyword });
-
-        expect(result.filteredAppList).toHaveLength(6);
-        expect(result.appListIds).toHaveLength(0);
-        expect(result.hasMoreItems).toBe(false);
-
-        keyword = "";
-        result = AppListReducer(result, {type: SEARCH_RESULT_BY_KEYWORD, keyword });
-
-        expect(result.filteredAppList).toHaveLength(10);
-        expect(result.appListIds).toHaveLength(0);
-
-        expect(result.hasMoreItems).toBe(false);
-    })
-
     it('should return true when apps are searching' , () => {
         const result = AppListReducer(initialState, { type: APP_RESULT_LOADING });
         expect(result).toEqual({

@@ -17,14 +17,13 @@ import {
     APP_RESULT_LOADED
 } from '../actionTypes';
 
-import { isMatchResult } from '../utils';
-
 const initialState: AppListState = {
     appListIds: [],
     filteredAppList: [],
     hasMoreItems: false,
     isAppLoading: false,
-    appListToBeSearch: []
+    appListToBeSearch: [],
+    isAppSearching: false
 }
 
 export default function AppListReducer(state: AppListState = initialState, action: SearchResultAction | GetFirstTenAppsAction | ShowNextTenItemsAction): AppListState{
@@ -42,22 +41,10 @@ export default function AppListReducer(state: AppListState = initialState, actio
             appListToBeSearch: filteredAppList
         }
     case SEARCH_RESULT_BY_KEYWORD:
-        let _list: Array<Array<AppItemObj>> = [];
+        const data: Array<AppItemObj> = _.get(action, 'data',[])
 
-        const keyword: string = _.get(action, 'keyword','')
-        
-        if (keyword !== '') {
-            const result: Array<AppItemObj> = _.chain(state)
-                .get('appListToBeSearch', [])
-                .filter((item: AppItemObj) => isMatchResult(item, ['name', 'category', 'summary', 'artistName'], keyword))
-                .value();
-            _list = _.chain(result).chunk(10).value();
-        } else {
-            _list = _.chain(state).get('appListToBeSearch', []).chunk(10).value();
-        }
-
-        state.appListIds = _list
-        state.filteredAppList = _.first(_list)
+        state.appListIds = _.chain(data).map(item => item.appId).chunk(10).value();
+        state.filteredAppList = _.chain(data).chunk(10).first().value();
         state.appListIds.shift();
 
         return { 
@@ -79,12 +66,12 @@ export default function AppListReducer(state: AppListState = initialState, actio
     case APP_RESULT_LOADING:
         return {
             ...state,
-            isAppLoading: true
+            isAppSearching: true
         }
     case APP_RESULT_LOADED:
         return {
             ...state,
-            isAppLoading: false,
+            isAppSearching: false,
             hasMoreItems: !_.isEmpty(state.appListIds)
         }
     default:

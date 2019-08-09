@@ -4,10 +4,10 @@ import axios from 'axios';
 import _ from 'lodash';
 import config from '../config';
 import axiosJsonpAdapter from "axios-jsonp";
+import { isMatchResult } from "../utils";
 
 export async function fetchApps(apiEndPoint: string) {
     try {
-        
         const result: FreeAppsResponse = await axios({
             url: apiEndPoint,
             headers: {
@@ -51,6 +51,18 @@ export async function fetchApps(apiEndPoint: string) {
 
         return output;
         
+    } catch (error) {
+        return error;
+    }
+}
+
+export async function searchApp(keyword: string) {
+    try {
+        const hunderAppsIds: Array<Array<string>> = await fetch100AppsId();
+        const hunderAppsItems: Array<AppItemObj> = await fetchAppsData(_.flatten(hunderAppsIds));
+        const result: Array<AppItemObj> = hunderAppsItems.filter((item: AppItemObj) => isMatchResult(item, ['name', 'category', 'summary', 'artistName'], keyword));
+        
+        return result;
     } catch (error) {
         return error;
     }
@@ -138,7 +150,7 @@ export async function fetchRecommendedAppsIds() {
         
         const ids: Array<string> = _.chain(result)
             .get('data.feed.entry', [])
-            .map(item => _.get(item, 'id.attributes.im:id', ''))
+            .map((item: string) => _.get(item, 'id.attributes.im:id', ''))
             .value();
         return ids;
         

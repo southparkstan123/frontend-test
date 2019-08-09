@@ -1,5 +1,5 @@
 // @flow
-import type { RootState } from '../../types';
+import type { RootState, AppItemObj } from '../../types';
 import React, { useEffect } from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 import { CSSTransitionGroup } from 'react-transition-group';
@@ -8,7 +8,8 @@ import SearchBar from '../../SearchBar/components/SearchBar';
 import AppList from '../../AppList/components/AppList';
 import LoadingSpinner from '../../LoadingSpinner/components/LoadingSpinner';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { fetchAllData } from '../../dao/AppsDao'
+import { fetchAllData, searchApp } from '../../dao/AppsDao';
+import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import {
     GET_RECOMMENDED_APPS,
     SITE_CONFIG_LOADING,
@@ -53,15 +54,16 @@ function AppContainer() {
     async function handleInputChange(keyword: string){
         try {
             dispatch({ type: APP_RESULT_LOADING });
+            const data: Array<AppItemObj> = await searchApp(keyword);
             dispatch({
-                type: SEARCH_RESULT_BY_KEYWORD, 
-                keyword
-            });
+                type: SEARCH_RESULT_BY_KEYWORD,
+                data
+            })
         } catch (error) {
             dispatch({ type: ERROR , error: error });
         } finally{
             dispatch({ type: APP_RESULT_LOADED });
-        }
+        }    
     }
 
     return (
@@ -75,7 +77,7 @@ function AppContainer() {
                         transitionEnter={false}
                         transitionLeave={false}
                     >
-                        <SearchBar onChangeKeyword={handleInputChange}></SearchBar>
+                        <SearchBar onChangeKeyword={AwesomeDebouncePromise(handleInputChange, 2000)}></SearchBar>
                         <div className="container-fluid mt-2">
                             <RecommendedAppList title="推介"></RecommendedAppList>
                             <AppList></AppList>
