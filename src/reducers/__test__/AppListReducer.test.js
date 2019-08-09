@@ -20,6 +20,7 @@ describe('AppListReducer', () => {
             filteredAppList: [],
             hasMoreItems: false,
             isAppLoading: false,
+            isAppSearching: false,
             appListToBeSearch: []
         }
 
@@ -126,7 +127,7 @@ describe('AppListReducer', () => {
         const result = AppListReducer(initialState, { type: APP_RESULT_LOADING });
         expect(result).toEqual({
             ...initialState,
-            isAppLoading: true
+            isAppSearching: true
         })
     });
 
@@ -134,7 +135,7 @@ describe('AppListReducer', () => {
         const result = AppListReducer(initialState, { type: APP_RESULT_LOADED });
         expect(result).toEqual({
             ...initialState,
-            isAppLoading: false
+            isAppSearching: false
         })
     });
 
