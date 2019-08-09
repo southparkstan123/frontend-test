@@ -9,3 +9,5 @@ export const ERROR: string = "ERROR";
 export const SEARCH_RESULT_BY_KEYWORD: string = "SEARCH_RESULT_BY_KEYWORD";
 export const APP_RESULT_LOADING: string = "APP_RESULT_LOADING";
 export const APP_RESULT_LOADED: string = "APP_RESULT_LOADED";
+export const APP_RESULT_SEARCHING: string = "APP_RESULT_SEARCHING";
+export const APP_RESULT_SEARCHED: string = "APP_RESULT_SEARCHED";

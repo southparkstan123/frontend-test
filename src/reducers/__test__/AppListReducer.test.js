@@ -6,7 +6,9 @@ import {
     APP_LIST_GET_FIRST_TEN_APPS,
     APP_LIST_SHOW_NEXT_TEN_ITEMS,
     APP_RESULT_LOADED,
-    APP_RESULT_LOADING
+    APP_RESULT_LOADING,
+    APP_RESULT_SEARCHING,
+    APP_RESULT_SEARCHED
 } from '../../actionTypes';
 
 describe('AppListReducer', () => {
@@ -123,8 +125,24 @@ describe('AppListReducer', () => {
         expect(result.hasMoreItems).toBe(false);
     });
 
-    it('should return true when apps are searching' , () => {
+    it('should return true when apps are loading' , () => {
         const result = AppListReducer(initialState, { type: APP_RESULT_LOADING });
+        expect(result).toEqual({
+            ...initialState,
+            isAppLoading: true
+        })
+    });
+
+    it('should return false when apps are loaded' , () => {
+        const result = AppListReducer(initialState, { type: APP_RESULT_LOADED });
+        expect(result).toEqual({
+            ...initialState,
+            isAppLoading: false
+        })
+    });
+
+    it('should return true when apps are searching' , () => {
+        const result = AppListReducer(initialState, { type: APP_RESULT_SEARCHING });
         expect(result).toEqual({
             ...initialState,
             isAppSearching: true
@@ -132,7 +150,7 @@ describe('AppListReducer', () => {
     });
 
     it('should return false when apps are searched' , () => {
-        const result = AppListReducer(initialState, { type: APP_RESULT_LOADED });
+        const result = AppListReducer(initialState, { type: APP_RESULT_SEARCHED });
         expect(result).toEqual({
             ...initialState,
             isAppSearching: false

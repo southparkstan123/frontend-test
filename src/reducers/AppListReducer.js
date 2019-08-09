@@ -14,7 +14,9 @@ import {
     SEARCH_RESULT_BY_KEYWORD,
     APP_LIST_SHOW_NEXT_TEN_ITEMS,
     APP_RESULT_LOADING,
-    APP_RESULT_LOADED
+    APP_RESULT_LOADED,
+    APP_RESULT_SEARCHING,
+    APP_RESULT_SEARCHED
 } from '../actionTypes';
 
 const initialState: AppListState = {
@@ -66,9 +68,20 @@ export default function AppListReducer(state: AppListState = initialState, actio
     case APP_RESULT_LOADING:
         return {
             ...state,
-            isAppSearching: true
+            isAppLoading: true
         }
     case APP_RESULT_LOADED:
+        return {
+            ...state,
+            isAppLoading: false,
+            hasMoreItems: !_.isEmpty(state.appListIds)
+        }
+    case APP_RESULT_SEARCHING:
+        return {
+            ...state,
+            isAppSearching: true
+        }
+    case APP_RESULT_SEARCHED:
         return {
             ...state,
             isAppSearching: false,

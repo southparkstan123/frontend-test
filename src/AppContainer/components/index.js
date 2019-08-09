@@ -17,8 +17,8 @@ import {
     APP_LIST_GET_FIRST_TEN_APPS,
     ERROR,
     SEARCH_RESULT_BY_KEYWORD,
-    APP_RESULT_LOADING,
-    APP_RESULT_LOADED
+    APP_RESULT_SEARCHING,
+    APP_RESULT_SEARCHED
 } from '../../actionTypes';
 import AppLoader from '../../AppList/components/AppLoader';
 
@@ -44,6 +44,10 @@ function AppContainer() {
         return state.SiteConfigReducer.isLoading;
     });
 
+    const isAppSearching = useMappedState((state: RootState) => {
+        return state.AppListReducer.isAppSearching;
+    });
+
     useEffect(() => {
         initData(dispatch);
         return () => {
@@ -51,10 +55,10 @@ function AppContainer() {
         }
     }, [dispatch]);
 
-    async function handleInputChange(keyword: string){
+    async function handleSearchApps(keyword: string){
         try {
-            dispatch({ type: APP_RESULT_LOADING });
             const data: Array<AppItemObj> = await searchApp(keyword);
+            console.log(data);
             dispatch({
                 type: SEARCH_RESULT_BY_KEYWORD,
                 data
@@ -62,8 +66,13 @@ function AppContainer() {
         } catch (error) {
             dispatch({ type: ERROR , error: error });
         } finally{
-            dispatch({ type: APP_RESULT_LOADED });
+            dispatch({ type: APP_RESULT_SEARCHED });
         }    
+    }
+
+    async function handleInputChange(keyword: string) {
+        dispatch({ type: APP_RESULT_SEARCHING });
+        AwesomeDebouncePromise(handleSearchApps(keyword), 2000)
     }
 
     return (
@@ -77,10 +86,12 @@ function AppContainer() {
                         transitionEnter={false}
                         transitionLeave={false}
                     >
-                        <SearchBar onChangeKeyword={AwesomeDebouncePromise(handleInputChange, 2000)}></SearchBar>
+                        <SearchBar onChangeKeyword={handleInputChange}></SearchBar>
                         <div className="container-fluid mt-2">
                             <RecommendedAppList title="推介"></RecommendedAppList>
-                            <AppList></AppList>
+                            {
+                                (!isAppSearching) ? <AppList></AppList> : <LoadingSpinner icon={faSpinner} size="2x" spin={true} isfullscreen={false}></LoadingSpinner>
+                            }
                             <AppLoader></AppLoader>
                         </div>
                     </CSSTransitionGroup>
