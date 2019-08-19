@@ -31,7 +31,7 @@ describe('<AppItem />', () => {
         const props = dataToProps(item, index);
         const wrapper = shallow(<AppItem {...props}></AppItem>)
         expect(wrapper).toMatchSnapshot();
-        expect(wrapper.find('div img').hasClass('rounded')).toBe(true);
+        expect(wrapper.find('div img').hasClass('icon-rounded')).toBe(true);
     });
 
     it('the icon should be circled when it is 12th item in the list', () => {
@@ -41,6 +41,6 @@ describe('<AppItem />', () => {
         const wrapper = shallow(<AppItem {...props}></AppItem>)
 
         expect(wrapper).toMatchSnapshot();
-        expect(wrapper.find('div img').hasClass('rounded-circle')).toBe(true);
+        expect(wrapper.find('div img').hasClass('icon-rounded-circle')).toBe(true);
     });
 })
