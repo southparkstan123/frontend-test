@@ -56,8 +56,7 @@ function AppContainer() {
         if(debouncedSearchKeyword){
             dispatch({ type: APP_RESULT_SEARCHING });
             searchApp(debouncedSearchKeyword)
-                .then(data => {
-                    console.log(data);
+                .then((data: Array<AppItemObj>) => {
                     dispatch({ type: SEARCH_RESULT_BY_KEYWORD, data })
                 })
                 .catch(error => dispatch({ type: ERROR , error: error }))
