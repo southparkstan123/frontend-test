@@ -1,6 +1,6 @@
 // @flow
 import type { RootState, AppItemObj } from '../../types';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 import { CSSTransitionGroup } from 'react-transition-group';
 import RecommendedAppList from '../../RecommendedApp/components/RecommendedAppList';
@@ -9,7 +9,6 @@ import AppList from '../../AppList/components/AppList';
 import LoadingSpinner from '../../LoadingSpinner/components/LoadingSpinner';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { fetchAllData, searchApp } from '../../dao/AppsDao';
-import AwesomeDebouncePromise from 'awesome-debounce-promise';
 import {
     GET_RECOMMENDED_APPS,
     SITE_CONFIG_LOADING,
@@ -21,6 +20,7 @@ import {
     APP_RESULT_SEARCHED
 } from '../../actionTypes';
 import AppLoader from '../../AppList/components/AppLoader';
+import useDebounce from '../../utils/useDebounce';
 
 async function initData(dispatch) {
     dispatch({ type: SITE_CONFIG_LOADING });
@@ -40,6 +40,8 @@ async function initData(dispatch) {
 function AppContainer() {
     const dispatch = useDispatch();
 
+    const [searchKeyword, setSearchKeyword] = useState('');
+
     const isLoading = useMappedState((state: RootState) => {
         return state.SiteConfigReducer.isLoading;
     });
@@ -48,32 +50,28 @@ function AppContainer() {
         return state.AppListReducer.isAppSearching;
     });
 
+    const debouncedSearchKeyword = useDebounce(searchKeyword, 2000);
+
     useEffect(() => {
-        initData(dispatch);
+        if(debouncedSearchKeyword){
+            dispatch({ type: APP_RESULT_SEARCHING });
+            searchApp(debouncedSearchKeyword)
+                .then(data => {
+                    console.log(data);
+                    dispatch({ type: SEARCH_RESULT_BY_KEYWORD, data })
+                })
+                .catch(error => dispatch({ type: ERROR , error: error }))
+                .finally(() => {
+                    dispatch({ type: APP_RESULT_SEARCHED });
+                });
+        } else {
+            initData(dispatch);
+        }
+
         return () => {
             dispatch({ type: SITE_CONFIG_LOADED });
         }
-    }, [dispatch]);
-
-    async function handleSearchApps(keyword: string){
-        try {
-            const data: Array<AppItemObj> = await searchApp(keyword);
-            console.log(data);
-            dispatch({
-                type: SEARCH_RESULT_BY_KEYWORD,
-                data
-            })
-        } catch (error) {
-            dispatch({ type: ERROR , error: error });
-        } finally{
-            dispatch({ type: APP_RESULT_SEARCHED });
-        }    
-    }
-
-    async function handleInputChange(keyword: string) {
-        dispatch({ type: APP_RESULT_SEARCHING });
-        AwesomeDebouncePromise(handleSearchApps(keyword), 2000)
-    }
+    }, [dispatch, debouncedSearchKeyword]);
 
     return (
         <div id="main">
@@ -86,7 +84,7 @@ function AppContainer() {
                         transitionEnter={false}
                         transitionLeave={false}
                     >
-                        <SearchBar onChangeKeyword={handleInputChange}></SearchBar>
+                        <SearchBar onChangeKeyword={setSearchKeyword}></SearchBar>
                         <div className="container-fluid mt-2">
                             <RecommendedAppList title="推介"></RecommendedAppList>
                             {
