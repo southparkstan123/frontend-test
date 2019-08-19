@@ -22,6 +22,14 @@
         opacity: 1;
         transition: opacity .5s ease-in;
     }
+
+    .apps-container {
+        margin-top: 0.5rem;
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    
 }
 
 #search-bar{
@@ -93,26 +101,58 @@
     }
 }
 
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
 
-#recommended-app-container{
+#recommended-app-section {
+    border-bottom: 1px solid $border-bottom;
 
-    overflow-y: scroll;
+    div.title {
+        margin-left: .5rem;
+        margin-right: .5rem
+    }
 
-    .recommended-app-item{
+    .not-found {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 
-        max-width: 116px;
+    #recommended-app-container{
 
-        div.name {
-            font-size: 13px;
-            color: $base-primary-font-color;
-        }
+        overflow-y: scroll;
+        padding: 0.5rem;
+        width: 100%;
+        flex-direction: row;
+        display: flex;
 
-        div.category {
-            font-size: 12px;
-            color: $base-secondary-font-color;
+        .recommended-app-item{
+            max-width: 116px;
+            margin: 0.25rem;
+
+            img {
+                margin: 0.5rem;
+            }
+
+            div.name {
+                font-size: 13px;
+                color: $base-primary-font-color;
+            }
+
+            div.category {
+                font-size: 12px;
+                color: $base-secondary-font-color;
+            }
         }
     }
 }
+
+
 
 .app-item {
     cursor: pointer;

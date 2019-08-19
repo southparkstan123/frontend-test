@@ -13,17 +13,17 @@ export default function RecommendedAppList(props: RecommendedAppListProps) {
 
     const emptyAppList = () => {
         return (
-            <div className='w-100 text-center my-3'>
+            <div className='not-found'>
                 <h5>找不到應用程式</h5>
             </div>
         )
     }
 
     return (
-        <div className="row border-bottom">
-            <div className="mx-2">{props.title}</div>
+        <div id="recommended-app-section">
+            <div className="title">{props.title}</div>
             {(list && list.length > 0) ?
-                <div id="recommended-app-container" className="w-100 d-flex flex-row p-2">
+                <div id="recommended-app-container">
                     {list.map((item: AppItemObj, index: number) =>
                         <RecommendedAppItem
                             key={index}

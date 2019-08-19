@@ -84,7 +84,7 @@ function AppContainer() {
                         transitionLeave={false}
                     >
                         <SearchBar onChangeKeyword={setSearchKeyword}></SearchBar>
-                        <div className="container-fluid mt-2">
+                        <div className="apps-container">
                             <RecommendedAppList title="推介"></RecommendedAppList>
                             {
                                 (!isAppSearching) ? <AppList></AppList> : <LoadingSpinner icon={faSpinner} size="2x" spin={true} isfullscreen={false}></LoadingSpinner>
