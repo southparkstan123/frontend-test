@@ -11,12 +11,28 @@ body{
 }
 
 #main { 
-    .spinner {
+    .spinner-overlay {
         position: fixed;
         top: calc(50% - 0.5rem * 2);
         right: 0;
         bottom: 0;
         left: 0;
+
+        .spinner {
+            margin: 0 3rem;
+            display: flex;
+            justify-content: center;
+
+            vertical-align: middle;
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .spinner {
+        margin: 0 3rem;
+        display: flex;
+        justify-content: center;
     }
 
     .rounded {
@@ -239,11 +255,6 @@ body{
         .app-list-icon {
             margin: 0 1rem;
         }
-    }
-    
-    .loading-apps {
-        text-align: center;
-        animation: spinner-spin infinite 1s linear;
     }
 }
 

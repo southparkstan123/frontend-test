@@ -13,12 +13,12 @@ type LoadingSpinnerProps = {
 export default function LoadingSpinner(props: LoadingSpinnerProps) {
     return(
         (props.isfullscreen === true) ?
-            <div className="spinner">
-                <div className="align-middle d-flex justify-content-center">
+            <div className="spinner-overlay">
+                <div className="spinner">
                     <FontAwesomeIcon size={props.size} icon={props.icon} spin={props.spin}/> 
                 </div>
             </div>
-            : <div className="my-5 d-flex justify-content-center">
+            : <div className="spinner">
                 <FontAwesomeIcon size={props.size} icon={props.icon} spin={props.spin}/> 
             </div>
     )
