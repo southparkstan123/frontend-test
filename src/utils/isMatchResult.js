@@ -1,6 +1,6 @@
 // @flow
 import * as _ from "lodash";
-import type { AppItemObj } from './types';
+import type { AppItemObj } from '../types';
 
 export function isMatchResult(item: AppItemObj, keys: Array<string>, keyword: string): boolean{
     const hasKeys: boolean = _.every(keys, _.partial(_.has, item));

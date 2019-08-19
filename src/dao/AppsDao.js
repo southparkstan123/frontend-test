@@ -4,7 +4,7 @@ import axios from 'axios';
 import _ from 'lodash';
 import config from '../config';
 import axiosJsonpAdapter from "axios-jsonp";
-import { isMatchResult } from "../utils";
+import { isMatchResult } from "../utils/isMatchResult";
 
 export async function fetchApps(apiEndPoint: string) {
     try {
