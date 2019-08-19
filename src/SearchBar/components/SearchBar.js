@@ -10,7 +10,7 @@ export default function SearchBar(props: SearchBarProps) {
                 <input 
                     id="search-input" 
                     onChange={(event: SyntheticInputEvent<HTMLInputElement>) => props.onChangeKeyword(event.target.value.trim())} 
-                    className="text-center form-control" 
+                    className="form-control" 
                     type="text"
                     placeholder='搜尋' />
             </div>
