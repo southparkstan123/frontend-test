@@ -82,6 +82,15 @@ body{
         background-clip: padding-box;
         border: 1px solid #ced4da;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+        & .form-control {
+            position: relative;
+            flex: 1 1 auto;
+            width: 1%;
+            margin-bottom: 0;
+            margin: 0 3rem;
+            text-align: center;
+        }
     }
 
     .input-wrapper {
