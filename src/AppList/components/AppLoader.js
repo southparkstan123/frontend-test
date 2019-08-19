@@ -13,7 +13,7 @@ export default function AppLoader() {
 
     return (
         (isAppLoading) ? 
-            <div className='row my-2 justify-content-center'>
+            <div id="app-loader" className='row'>
                 <LoadingSpinner icon={faSyncAlt} size="2x" spin={true} isfullscreen={false}></LoadingSpinner>
             </div> : false
     )
