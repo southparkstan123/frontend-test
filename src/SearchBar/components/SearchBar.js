@@ -5,8 +5,8 @@ import React from 'react';
 export default function SearchBar(props: SearchBarProps) {
 
     return (
-        <nav id="search-bar" className="sticky-top navbar-light bg-light p-2">
-            <div className="input-group">
+        <nav id="search-bar">
+            <div className="input-wrapper">
                 <input 
                     id="search-input" 
                     onChange={(event: SyntheticInputEvent<HTMLInputElement>) => props.onChangeKeyword(event.target.value.trim())} 
