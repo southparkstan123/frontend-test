@@ -7,18 +7,18 @@ import type { AppItemProps } from "../../types";
 export default function AppItem(props: AppItemProps) {
 
     const classOfAvatar = (index: number): string => {
-        return (index % 2 !== 0) ? "mx-3 rounded" : "mx-3 rounded-circle"
+        return (index % 2 !== 0) ? "app-list-icon icon-rounded" : "app-list-icon icon-rounded-circle"
     }
 
     return (
-        <div className="app-item col-sm-12 col-md-6 item-border">
-            <div className="media p-2 d-flex align-items-center">
+        <div className="app-item item-border">
+            <div className="media">
                 <div className="index">{props.index}</div>
                 <img className={classOfAvatar(props.index)} src={props.avatar} alt={props.name}></img>
-                <div className="media-body ml-3">
+                <div className="media-body">
                     <div className="name">{props.name}</div>
-                    <div className="category justify-content-center">{props.category}</div>
-                    <div className="rating align-items-center">
+                    <div className="category">{props.category}</div>
+                    <div className="rating">
                         <StarRatings 
                             starRatedColor="#eee000" 
                             rating={props.averageUserRating} 

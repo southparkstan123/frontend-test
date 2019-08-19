@@ -27,7 +27,7 @@ export default function AppList() {
 
     const EmptyAppList = () => {
         return (
-            <div className='row my-5 justify-content-center'>
+            <div className='row apps-not-found'>
                 <h1>找不到應用程式</h1>
             </div>
         )
@@ -46,25 +46,29 @@ export default function AppList() {
     }
 
     return (
-        (filteredAppList && filteredAppList.length > 0) ?
-            (
-                <InfiniteScroll
-                    pageStart={0}
-                    loadMore={loadNext10Apps}
-                    hasMore={hasMoreItems}
-                    className="row"
-                    initialLoad={false}
-                >
-                    {
-                        filteredAppList.map((appItem: AppItemObj, index: number) => 
-                            <AppItem 
-                                key={index}
-                                index={index + 1} 
-                                {...appItem}
-                            ></AppItem> 
-                        )
-                    }
-                </InfiniteScroll>
-            ) : EmptyAppList()
+        <div id="app-list-container">
+            {
+                (filteredAppList && filteredAppList.length > 0) ?
+                    (
+                        <InfiniteScroll
+                            pageStart={0}
+                            loadMore={loadNext10Apps}
+                            hasMore={hasMoreItems}
+                            className="row app-list-container"
+                            initialLoad={false}
+                        >
+                            {
+                                filteredAppList.map((appItem: AppItemObj, index: number) => 
+                                    <AppItem 
+                                        key={index}
+                                        index={index + 1} 
+                                        {...appItem}
+                                    ></AppItem> 
+                                )
+                            }
+                        </InfiniteScroll>
+                    ) : EmptyAppList()
+            }
+        </div>
     )
 }
