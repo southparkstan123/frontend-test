@@ -37,7 +37,7 @@ async function initData(dispatch) {
     }
 }
 
-function AppContainer() {
+function LandingPage() {
     const dispatch = useDispatch();
 
     const [searchKeyword, setSearchKeyword] = useState('');
@@ -99,4 +99,4 @@ function AppContainer() {
     );
 }
 
-export default AppContainer;
+export default LandingPage;

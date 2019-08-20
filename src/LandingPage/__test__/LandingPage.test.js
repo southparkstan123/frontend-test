@@ -3,13 +3,13 @@ import React from 'react';
 import { mount } from "enzyme";
 import { StoreContext } from 'redux-react-hook';
 
-import AppContainer from "../components/index";
+import LandingPage from "../components/index";
 import FreeAppList from '../../../mock/FreeAppList.json';
 
 import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore();
 
-describe('<AppContainer />', () => {
+describe('<LandingPage />', () => {
     let wrapper, store;
 
     beforeEach(() => {
@@ -33,7 +33,7 @@ describe('<AppContainer />', () => {
         
         wrapper = mount(
             <StoreContext.Provider value={store}>
-                <AppContainer />
+                <LandingPage />
             </StoreContext.Provider> 
         );
     });

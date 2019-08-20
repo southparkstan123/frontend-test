@@ -1,13 +1,13 @@
 // @flow
 import React from 'react';
 import { StoreContext } from 'redux-react-hook';
-import AppContainer from './AppContainer/components';
+import LandingPage from './LandingPage/components';
 import { store } from './store';
 
 function App() {
     return (
         <StoreContext.Provider value={store}>
-            <AppContainer></AppContainer>
+            <LandingPage></LandingPage>
         </StoreContext.Provider>
     );
 }
