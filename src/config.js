@@ -1,6 +1,6 @@
 //@flow
 export default {
-    HUNDRED_FREE_APPS_API: 'https://itunes.apple.com/hk/rss/topfreeapplications/limit=100/json',
-    RECOMMENDED_APPS_API: 'https://itunes.apple.com/hk/rss/topgrossingapplications/limit=10/json',
-    LOOKUP_API: 'https://itunes.apple.com/hk/lookup'
+    HUNDRED_FREE_APPS_API: process.env.REACT_APP_HUNDRED_FREE_APPS_API,
+    RECOMMENDED_APPS_API: process.env.REACT_APP_RECOMMENDED_APPS_API,
+    LOOKUP_API: process.env.REACT_APP_LOOKUP_API
 }
