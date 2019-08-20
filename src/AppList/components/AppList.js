@@ -54,7 +54,7 @@ export default function AppList() {
                             pageStart={0}
                             loadMore={loadNext10Apps}
                             hasMore={hasMoreItems}
-                            className="row app-list-container"
+                            className="row"
                             initialLoad={false}
                         >
                             {
