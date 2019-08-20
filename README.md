@@ -16,6 +16,7 @@ The SPA for fetching the free apps and recommended apps in iOS with searching fe
 
 1. Clone the git repo
 2. Run `yarn install` to install the dependencies for the app
+3. Clone the file `.env.example` and rename the file according to the desired environment(e.g. `.env.local` for development mode)
 
 ### Start-up the app in development mode
 
