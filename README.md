@@ -12,7 +12,7 @@ The SPA for fetching the free apps and recommended apps in iOS with searching fe
 4. SASS
 5. Flow for static type checker
 
-## Setup the app
+## Setup the app locally
 
 1. Clone the git repo
 2. Run `yarn install` to install the dependencies for the app
@@ -26,7 +26,7 @@ The SPA for fetching the free apps and recommended apps in iOS with searching fe
 
 ### Start-up the app in production mode
 
-1. Create file `.env.production` for adding the environment values
+1. Create file `.env.production.local` for adding the environment values
 2. Run `yarn build` and `serve -s build`
 3. Open http://localhost:5000 in web browser
 
