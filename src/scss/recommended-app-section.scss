@@ -1,0 +1,43 @@
+@import "_variables.scss";
+
+#recommended-app-section {
+    div.title {
+        margin-left: .5rem;
+        margin-right: .5rem
+    }
+
+    .not-found {
+        width: 100%;
+        text-align: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    #recommended-app-container{
+
+        overflow-y: scroll;
+        padding: 0.5rem;
+        width: 100%;
+        flex-direction: row;
+        display: flex;
+
+        .recommended-app-item{
+            max-width: 116px;
+            margin: 0.25rem;
+
+            img {
+                margin: 0.5rem;
+            }
+
+            div.name {
+                font-size: 13px;
+                color: $base-primary-font-color;
+            }
+
+            div.category {
+                font-size: 12px;
+                color: $base-secondary-font-color;
+            }
+        }
+    }
+}

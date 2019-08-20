@@ -1,0 +1,79 @@
+@import "_variables.scss";
+
+#search-bar{
+    border-bottom: 1px solid $border;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    padding: .5rem;
+    background-color: $bg-color-search-bar;
+
+    #search-input {
+        border-radius: 0;
+        text-align: center;
+        margin-left: 3rem;
+        margin-right: 3rem;
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 0.75rem + 2px);
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+        & .form-control {
+            position: relative;
+            flex: 1 1 auto;
+            width: 1%;
+            margin-bottom: 0;
+            margin: 0 3rem;
+            text-align: center;
+        }
+    }
+
+    .input-wrapper {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+    }
+
+    /* Chrome */
+    input::-webkit-input-placeholder {
+        color: $base-primary-font-color;
+        text-align: center;
+    }
+    input:focus::-webkit-input-placeholder {
+        color: $base-secondary-font-color;
+        text-align: center;
+    }
+    
+    /* Firefox < 19 */
+    input:-moz-placeholder {
+        color: $base-primary-font-color;
+    }
+    input:focus:-moz-placeholder {
+        color: $base-secondary-font-color;
+    }
+
+    /* Firefox > 19 */
+    input::-moz-placeholder {
+        color: $base-primary-font-color;
+    }
+    input:focus::-moz-placeholder {
+        color: $base-secondary-font-color;
+    }
+
+    /* Internet Explorer 10 */
+    input:-ms-input-placeholder {
+        color: $base-primary-font-color;
+    }
+    input:focus:-ms-input-placeholder {
+        color: $base-secondary-font-color;
+    }
+}

@@ -1,0 +1,77 @@
+@import "_variables.scss";
+
+#app-list-container {
+    .apps-not-found {
+        justify-content: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .app-item {
+        cursor: pointer;
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+
+        @media (min-width: 576px){
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        @media screen and (min-width: 768px){
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+    
+        &.item-border {
+            border-bottom: none;
+    
+            @media screen and (max-width: 768px) {
+                &:first-child{
+                    border-top: 1px solid $border;
+                }
+                border-bottom: 1px solid $border
+            }
+        }
+    
+        .media {
+            padding: 0.5rem;
+            align-items: center;
+            display: flex;
+    
+            .media-body {
+                flex: 1 1;
+                margin-left: 1rem;
+            }
+        }
+    
+        .index{
+            width:20px;
+            color: $base-secondary-font-color;
+        }
+        
+        .name {
+            font-size: 13px;
+            color: $base-primary-font-color;
+        }
+    
+        .category {
+            font-size: 12px;
+            color: $base-secondary-font-color;
+            justify-content: center;
+        }
+    
+        .rating {
+            align-items: center;
+            span {
+                font-size: 12px;
+                color: $base-third-font-color;
+            }
+        }
+
+        .app-list-icon {
+            margin: 0 1rem;
+        }
+    }
+}
