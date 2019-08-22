@@ -126,7 +126,10 @@ export async function fetchAppsData(ids: Array<string>){
                 appId: _.get(item, 'trackId', ''),
                 name: _.get(item, 'trackName', ''),
                 category: _.chain(item).get('genres', []).first().value(),
-                avatar: _.get(item, 'artworkUrl100', ''),
+                avatar: {
+                    large: _.get(item, 'artworkUrl100', ''),
+                    small: _.get(item, 'artworkUrl60', ''),
+                },
                 summary: _.get(item, 'description', ''),
                 artistName: _.get(item, 'artistName', ''),
                 averageUserRating: _.get(item, 'averageUserRating', 0),

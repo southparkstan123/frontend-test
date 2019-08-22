@@ -14,7 +14,8 @@ export default function AppItem(props: AppItemProps) {
         <div className="app-item item-border">
             <div className="media">
                 <div className="index">{props.index}</div>
-                <img className={classOfAvatar(props.index)} src={props.avatar} alt={props.name}></img>
+                <img className={`${classOfAvatar(props.index)} sm`} src={props.avatar.small} alt={props.name}></img>
+                <img className={`${classOfAvatar(props.index)} lg`} src={props.avatar.large} alt={props.name}></img>
                 <div className="media-body">
                     <div className="name">{props.name}</div>
                     <div className="category">{props.category}</div>

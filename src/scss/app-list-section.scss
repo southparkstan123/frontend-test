@@ -27,7 +27,7 @@
         &.item-border {
             border-bottom: none;
     
-            @media screen and (max-width: 768px) {
+            @media screen and (max-width: 767px) {
                 &:first-child{
                     border-top: 1px solid $border;
                 }

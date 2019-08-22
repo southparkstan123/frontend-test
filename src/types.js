@@ -3,7 +3,10 @@ export type AppItemObj = {
     appId: string,
     name: string,
     category: string,
-    avatar: string,
+    avatar: {
+        large: string,
+        small: string,
+    },
     summary: string,
     artistName: string,
     averageUserRating: number,
