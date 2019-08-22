@@ -59,9 +59,9 @@ export async function fetchApps(apiEndPoint: string) {
 export async function searchApp(keyword: string) {
     try {
         const hunderAppsIds: Array<Array<string>> = await fetch100AppsId();
-        const hunderAppsItems: Array<AppItemObj> = await fetchAppsData(_.flatten(hunderAppsIds));
+        const recommendedAppsIds: Array<string> = await fetchRecommendedAppsIds();
+        const hunderAppsItems: Array<AppItemObj> = await fetchAppsData(_.flatten(_.concat(recommendedAppsIds, hunderAppsIds)));
         const result: Array<AppItemObj> = hunderAppsItems.filter((item: AppItemObj) => isMatchResult(item, ['name', 'category', 'summary', 'artistName'], keyword));
-        
         return result;
     } catch (error) {
         return error;
