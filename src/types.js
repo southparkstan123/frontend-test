@@ -181,3 +181,13 @@ export type SearchResultLoadingAction = {
 export type SearchResultLoadedAction = { 
     type: "APP_RESULT_LOADED"
 }
+
+export type IconProps = {
+    isAppListIcon: boolean,
+    src: {
+        small: string,
+        large: string
+    },
+    alt?: string,
+    index: number
+}

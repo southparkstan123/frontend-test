@@ -1,28 +1,27 @@
-.app-item {
-    img.app-list-icon {
-        @media (max-width: 575px){
-            &.sm {
-                display: block;
-            }
 
-            &.lg {
-                display: none;
-            }
-            
+img.icon {
+    @media (max-width: 575px){
+        &.sm {
+            display: block;
         }
 
-        @media screen and (min-width: 576px){
-            &.sm {
-                display: none;
-            }
-
-            &.lg {
-                display: block;
-            }
+        &.lg {
+            display: none;
         }
+        
     }
 
+    @media screen and (min-width: 576px){
+        &.sm {
+            display: none;
+        }
+
+        &.lg {
+            display: block;
+        }
+    }
 }
+
 
 .icon-rounded {
     border-radius: 1.25rem;
