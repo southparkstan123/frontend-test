@@ -24,19 +24,18 @@ describe('<SearchBar />', () => {
                 hasMoreItems: true
             }
         };
-
-        const onChangeKeyword = jest.fn();
-
         store = mockStore(initialState);
-
-        wrapper = mount(
-            <StoreContext.Provider value={store}>
-                <SearchBar />
-            </StoreContext.Provider>
-        );
     });
 
     it('should be rendered', () => {
+        const onChangeKeyword = jest.fn();
+
+        wrapper = mount(
+            <StoreContext.Provider value={store}>
+                <SearchBar onChangeKeyword={onChangeKeyword} />
+            </StoreContext.Provider>
+        );
+
         expect(wrapper.find("nav#search-bar")).toHaveLength(1);
     });
 

@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import React from 'react';
 import { mount } from "enzyme";
 
@@ -20,8 +19,6 @@ describe('<RecommendedAppList />', () => {
         const wrapper = mount(
             <Icon {...iconProps}/>
         );
-
-        console.log(wrapper.html());
 
         expect(wrapper.find('img.sm.icon-rounded-circle').find({alt: "Test1"})).toHaveLength(1);
         expect(wrapper.find('img.lg.icon-rounded-circle').find({alt: "Test1"})).toHaveLength(1);
