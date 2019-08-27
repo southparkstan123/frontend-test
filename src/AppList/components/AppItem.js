@@ -9,7 +9,7 @@ export default function AppItem(props: AppItemProps) {
         <div className="app-item item-border">
             <div className="media">
                 <div className="index">{props.index}</div>
-                <Icon index={props.index} isAppListIcon={false} urlLinks={props.avatar} alt={props.name}></Icon>
+                <Icon index={props.index} isAppListIcon={true} urlLinks={props.avatar} alt={props.name}></Icon>
                 <div className="media-body">
                     <div className="name">{props.name}</div>
                     <div className="category">{props.category}</div>
