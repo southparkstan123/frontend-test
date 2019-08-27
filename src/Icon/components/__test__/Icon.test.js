@@ -4,17 +4,6 @@ import { mount } from "enzyme";
 
 import Icon from '../Icon';
 
-
-type IconProps = {
-    isAppListIcon: boolean,
-    urlLinks: {
-        small: string,
-        large: string
-    },
-    alt?: string,
-    index: number
-}
-
 describe('<RecommendedAppList />', () => {
     it('should be rendered as circle if isAppListIcon is true and even index', () => {
 

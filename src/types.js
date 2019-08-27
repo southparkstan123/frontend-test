@@ -184,7 +184,7 @@ export type SearchResultLoadedAction = {
 
 export type IconProps = {
     isAppListIcon: boolean,
-    src: {
+    urlLinks: {
         small: string,
         large: string
     },

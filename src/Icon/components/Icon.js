@@ -1,15 +1,6 @@
 // @flow
 import React, { Fragment } from 'react';
-
-type IconProps = {
-    isAppListIcon: boolean,
-    urlLinks: {
-        small: string,
-        large: string
-    },
-    alt?: string,
-    index: number
-}
+import type { IconProps } from '../../types';
 
 const classOfAvatar = (index: number, isAppListIcon: boolean): string => {
     let output = '';
