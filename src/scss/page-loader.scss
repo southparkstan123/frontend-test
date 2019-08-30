@@ -1,0 +1,35 @@
+#page-loader {
+    position: fixed;
+    top: calc(50% - 0.5rem * 2);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+
+    .character {
+        display: inline-flex;
+        font-size: 2rem;
+        animation: flag 1s infinite;
+        animation-direction: alternate-reverse;
+        
+        @for $i from 1 through 10 {
+            &:nth-child(#{$i}){
+                animation-delay: ($i - 1) * 0.1s;
+            }
+        }
+    }
+}
+  
+@keyframes flag {
+    0% {
+        transform: translateY(0); 
+    }
+    50% {
+        transform: translateY(-15px); 
+    }
+    100% {
+        transform: translateY(0);  
+    }
+}
+  
+  

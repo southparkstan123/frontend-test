@@ -6,6 +6,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import RecommendedAppList from '../../RecommendedApp/components/RecommendedAppList';
 import SearchBar from '../../SearchBar/components/SearchBar';
 import AppList from '../../AppList/components/AppList';
+import AppLoader from '../../AppList/components/AppLoader';
 import LoadingSpinner from '../../LoadingSpinner/components/LoadingSpinner';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { fetchAllData, searchApp } from '../../dao/AppsDao';
@@ -19,7 +20,7 @@ import {
     APP_RESULT_SEARCHING,
     APP_RESULT_SEARCHED
 } from '../../actionTypes';
-import AppLoader from '../../AppList/components/AppLoader';
+import PageLoader from '../../PageLoader/components';
 import useDebounce from '../../utils/useDebounce';
 
 async function initData(dispatch) {
@@ -93,7 +94,7 @@ function LandingPage() {
                         </div>
                     </CSSTransitionGroup>
                     :
-                    <LoadingSpinner icon={faSpinner} size="6x" spin={true} isfullscreen={true}></LoadingSpinner>
+                    <PageLoader></PageLoader>
             }
         </div>
     );
