@@ -14,6 +14,10 @@
         padding-right: 15px;
         padding-left: 15px;
 
+        &:hover{
+            background-color: $app-item-bg-color-hover;
+        }
+
         @media (min-width: 576px){
             flex: 0 0 100%;
             max-width: 100%;
