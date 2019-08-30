@@ -40,7 +40,7 @@ describe('<LandingPage />', () => {
 
     it('should be rendered', () => {
         expect(wrapper.find('div#main')).toHaveLength(1);
-        expect(wrapper.find('div#main').find('.spinner')).toHaveLength(1);
+        expect(wrapper.find('div#main').find('#page-loader')).toHaveLength(1);
         expect(wrapper).toMatchSnapshot();
     })
 })
