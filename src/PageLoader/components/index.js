@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function PageLoader() {
     return (
-        <div id="page-loader" style={{textAlign: "center"}}>
+        <div id="page-loader">
             <div className="character">L</div>
             <div className="character">o</div>
             <div className="character">a</div>

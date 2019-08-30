@@ -11,6 +11,14 @@
         font-size: 2rem;
         animation: flag 1s infinite;
         animation-direction: alternate-reverse;
+
+        @media (min-width: 576px){
+            font-size: 3rem;
+        }
+    
+        @media screen and (min-width: 768px){
+            font-size: 4rem;
+        }
         
         @for $i from 1 through 10 {
             &:nth-child(#{$i}){
