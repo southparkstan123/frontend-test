@@ -151,6 +151,7 @@ export type RecommendedAppState ={
 
 export type SiteConfigState ={
     isLoading: boolean,
+    loadingState: string
 }
 
 export type RootState ={

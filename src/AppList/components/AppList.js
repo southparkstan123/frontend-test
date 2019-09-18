@@ -3,10 +3,8 @@ import React from 'react';
 import { useDispatch, useMappedState } from 'redux-react-hook';
 import InfiniteScroll from 'react-infinite-scroller';
 import AppItem from './AppItem';
-import { APP_LIST_SHOW_NEXT_TEN_ITEMS, ERROR, APP_RESULT_LOADING, APP_RESULT_LOADED } from '../../actionTypes';
+import { LOAD_NEXT_10_APPS } from '../../actionTypes';
 import _ from 'lodash';
-import { fetchAppsData } from '../../dao/AppsDao';
-
 import type { RootState, AppItemObj } from '../../types'
 
 export default function AppList() {
@@ -34,15 +32,7 @@ export default function AppList() {
     }
 
     async function loadNext10Apps () {
-        dispatch({ type: APP_RESULT_LOADING });
-        try {
-            const result: Array<AppItemObj> = await fetchAppsData(idsforNext10Items);
-            dispatch({ type: APP_LIST_SHOW_NEXT_TEN_ITEMS , data: result })
-        } catch (error) {
-            dispatch({ type: ERROR , error: error });
-        } finally {
-            dispatch({ type: APP_RESULT_LOADED });
-        }
+        dispatch({ type: LOAD_NEXT_10_APPS, ids: idsforNext10Items});
     }
 
     return (

@@ -1,5 +1,5 @@
 // @flow
-import type { RootState, AppItemObj } from '../../types';
+import type { RootState } from '../../types';
 import React, { useEffect, useState } from 'react';
 import { useMappedState, useDispatch } from 'redux-react-hook';
 import { CSSTransitionGroup } from 'react-transition-group';
@@ -8,34 +8,13 @@ import SearchBar from '../../SearchBar/components/SearchBar';
 import AppList from '../../AppList/components/AppList';
 import LoadingSpinner from '../../LoadingSpinner/components/LoadingSpinner';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { fetchAllData, searchApp } from '../../dao/AppsDao';
 import {
-    GET_RECOMMENDED_APPS,
-    SITE_CONFIG_LOADING,
     SITE_CONFIG_LOADED,
-    APP_LIST_GET_FIRST_TEN_APPS,
-    ERROR,
-    SEARCH_RESULT_BY_KEYWORD,
-    APP_RESULT_SEARCHING,
-    APP_RESULT_SEARCHED
+    SEARCHING_APPS,
+    LOAD_ALL_DATA
 } from '../../actionTypes';
 import AppLoader from '../../AppList/components/AppLoader';
 import useDebounce from '../../utils/useDebounce';
-
-async function initData(dispatch) {
-    dispatch({ type: SITE_CONFIG_LOADING });
-    try {
-        const result = await fetchAllData();
-        const { hunderAppsIds, first10FreeAppsResult, recomendedAppsResult } = result;
-
-        dispatch({ type: APP_LIST_GET_FIRST_TEN_APPS, data: { hunderAppsIds, first10FreeAppsResult } });
-        dispatch({ type: GET_RECOMMENDED_APPS, data: recomendedAppsResult });
-    } catch (error) {
-        return error;
-    } finally {
-        dispatch({ type: SITE_CONFIG_LOADED });
-    }
-}
 
 function LandingPage() {
     const dispatch = useDispatch();
@@ -50,27 +29,32 @@ function LandingPage() {
         return state.AppListReducer.isAppSearching;
     });
 
+    const loadingState = useMappedState((state: RootState) => {
+        return state.SiteConfigReducer.loadingState;
+    });
+
     const debouncedSearchKeyword = useDebounce(searchKeyword, 2000);
 
     useEffect(() => {
         if(debouncedSearchKeyword){
-            dispatch({ type: APP_RESULT_SEARCHING });
-            searchApp(debouncedSearchKeyword)
-                .then((data: Array<AppItemObj>) => {
-                    dispatch({ type: SEARCH_RESULT_BY_KEYWORD, data })
-                })
-                .catch(error => dispatch({ type: ERROR , error: error }))
-                .finally(() => {
-                    dispatch({ type: APP_RESULT_SEARCHED });
-                });
+            dispatch({ type: SEARCHING_APPS, keyword: debouncedSearchKeyword })
         } else {
-            initData(dispatch);
+            dispatch({ type: LOAD_ALL_DATA });
         }
 
         return () => {
             dispatch({ type: SITE_CONFIG_LOADED });
         }
     }, [dispatch, debouncedSearchKeyword]);
+
+    const loadingStateStyle = {
+        position: 'fixed',
+        top: 'calc(50% - 0.5rem * 2)',
+        right: 0,
+        bottom: 0,
+        left: 0,
+        textAlign: 'center'
+    }
 
     return (
         <div id="main">
@@ -93,7 +77,9 @@ function LandingPage() {
                         </div>
                     </CSSTransitionGroup>
                     :
-                    <LoadingSpinner icon={faSpinner} size="6x" spin={true} isfullscreen={true}></LoadingSpinner>
+                    <div id="loading-state" style={loadingStateStyle}>
+                        <h1>{loadingState}</h1>
+                    </div>
             }
         </div>
     );
