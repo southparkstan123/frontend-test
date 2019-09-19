@@ -38,7 +38,7 @@ export default function SiteConfigReducer (state: SiteConfigState = initialState
     case RECOMMENDED_APPS_INITIALIZED:
         return {
             ...state,
-            loadingState: 'Recommended apps is loaded...'
+            loadingState: 'Recommended apps is loaded!'
         }
     case APP_RESULT_INITIALIZING:
         return {
@@ -48,7 +48,7 @@ export default function SiteConfigReducer (state: SiteConfigState = initialState
     case APP_RESULT_INITIALIZED:
         return {
             ...state,
-            loadingState: '100 apps is loaded...'
+            loadingState: '100 apps is loaded!'
         }
     default:
         return state;
